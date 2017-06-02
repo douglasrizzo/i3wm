@@ -1,0 +1,515 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# PRE-REQUISITES
+# Repositories: dnf copr enable mkrawiec/i3desktop
+#               dnf copr enable jvcelak/playerctl
+# Packages: i3 i3lock i3-ipc i3status i3blocks playerctl
+#           feh compton rofi network-manager-applet
+# Fonts: Overpass, FontAwesome
+#
+
+# Set mod key to Super
+set $mod Mod4
+
+# Set tags color for later use
+set $base00 #101218
+set $base01 #1f222d
+set $base02 #252936
+set $base03 #7780a1
+set $base04 #C0C5CE
+set $base05 #d1d4e0
+set $base06 #C9CCDB
+set $base07 #ffffff
+set $base08 #ee829f
+set $base09 #f99170
+set $base0A #ffefcc
+set $base0B #a5ffe1
+set $base0C #97e0ff
+set $base0D #97bbf7
+set $base0E #c0b7f9
+set $base0F #fcc09e
+
+# Set colors
+set $bg-color            #2f343f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+# Set window colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #00ff00
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+
+# Set screen names
+# Command: xrandr --current
+# Command: xrandr --query
+
+# Primary screen
+set $screen1 "eDP1"
+
+# Secondary screen
+set $screen2 "DP2-1"
+
+# Additional screens
+#set $screen1 "LVDS1"
+#set $screen1 "DP1"
+#set $screen1 "DP2"
+#set $screen1 "DP2-1"
+#set $screen1 "DP2-2"
+#set $screen1 "DP2-3"
+#set $hdmi1 "HDMI1"
+#set $hdmi2 "HDMI2"
+#set $vga1 "VGA1"
+#set $screen1 "LVDS1"
+
+# Set TouchPad device
+# Commands: xinput list and xinput list-props $touchpad
+set $touchpad "SynPS/2 Synaptics TouchPad"
+
+# Set audio out devices
+# Command: pactl list sinks
+set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
+
+# Set audio in devices
+# Command: pactl list sources
+set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
+
+# Set wallpaper directory
+set $wallpaper ~/Pictures/wallhaven-272950.jpg
+
+# Set custom scripts path
+set $scripts ~/.config/i3/scripts/
+
+# Wallpaper
+exec_always --no-startup-id feh --bg-scale $wallpaper
+
+# Composite window
+exec --no-startup-id compton --fading --config ~/.config/i3/compton.conf
+
+# NetworkManager applet
+exec_always --no-startup-id nm-applet
+
+# Enable click touch on touchpads
+# Commands: xinput list and xinput list-props "SynPS/2 Synaptics TouchPad"
+exec --no-startup-id xinput set-prop $touchpad "libinput Tapping Enabled" 1
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+#font pango:Overpass 10
+font pango:DejaVu Sans Mono 9
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+hide_edge_borders both
+new_window pixel 2
+
+# Start a terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec gnome-terminal
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start dmenu (a program launcher)
+# bindsym $mod+d exec dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec rofi -show run
+
+# Rofi bindings
+bindsym F9 exec rofi -show run -fg "#f1f1f1" -bg "#333333" -hlfg "#ffffff" -hlbg "#336699" -o 85
+bindsym F12 exec rofi -show window -fg "#f1f1f1" -bg "#333333" -hlfg "#ffffff" -hlbg "#336699" -o 85
+
+# Start rofi (alternative program launcher)
+#bindsym $mod+d exec rofi -show run
+#bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -fullscreen -opacity "90" -color-enabled -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "Overpass 12"
+
+# Lock screen
+bindsym $mod+Ctrl+x exec i3lock -I 15 -e -f --color 0F121B
+
+# Screensaver lock
+#exec --no-startup-id xset dpms 600
+#exec --no-startup-id xautolock -time 10 -locker i3lock -I 15 -e -f --color 0F121B
+
+# Change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# Alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# Alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split in horizontal orientation
+bindsym $mod+h split h
+
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# Sticky window
+bindsym $mod+Shift+s sticky toggle
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# Change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container
+bindsym $mod+a focus parent
+
+# Focus the child container
+#bindsym $mod+d focus child
+
+# Set workspaces variables and specific icon sets
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
+set $workspace4 "4: "
+set $workspace5 "5: "
+set $workspace6 "6: "
+set $workspace7 "7: "
+set $workspace8 "8: "
+set $workspace9 "9: "
+set $workspace0 "0: "
+
+# Switch back and forth between previous workspace
+workspace_auto_back_and_forth yes
+
+# Switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace0
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace0
+
+# Workspace default screens
+#workspace $workspace1 output $screen1
+#workspace $workspace2 output $screen1
+#workspace $workspace3 output $screen1
+#workspace $workspace4 output $screen1
+#workspace $workspace5 output $screen1
+#workspace $workspace6 output $screen1
+#workspace $workspace9 output $screen1
+#workspace $workspace0 output $screen1
+
+# Floating windows
+# [class="program_name"]
+for_window [class="Pavucontrol"] floating enable
+
+# Default workspaces
+#assign [class="firefox"] $workspace1
+#assign [class="google-chrome"] $workspace2
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "$scripts/exit_menu"
+
+# Volume Control for Pulse Audio (pactl list sinks)
+# Command: pactl list sinks
+# Increase sound volume
+bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume $audio_out1 +5%"
+# Increase sound volume (alternative)
+bindsym $mod+F3 exec "pactl set-sink-volume $audio_out1 +5%"
+# Decrease sound volume
+bindsym XF86AudioLowerVolume exec "pactl set-sink-volume $audio_out1 -5%"
+# Decrease sound volume (alternative)
+bindsym $mod+F2 exec "pactl set-sink-volume $audio_out1 -5%"
+# Mute sound
+bindsym XF86AudioMute exec "pactl set-sink-mute $audio_out1 toggle"
+# Mute sound (alternative)
+bindsym $mod+F1 exec "pactl set-sink-mute $audio_out1 toggle"
+
+# Mute microphone
+# Command: pactl list sources
+bindsym XF86AudioMicMute exec "pactl set-source-mute $audio_inp1 toggle"
+# Mute microphone (alternative)
+bindsym $mod+F4 exec "pactl set-source-mute $audio_inp1 toggle"
+
+# Screen brightness controls
+# Increase screen brightness
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10"
+# Increase screen brightness (alternative)
+bindsym $mod+F6 exec "xbacklight -inc 10"
+# Decrease screen brightness
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10"
+# Decrease screen brightness (alternative)
+bindsym $mod+F5 exec "xbacklight -dec 10"
+
+# Media player controls
+# Play/Pause
+bindsym XF86AudioPlay exec playerctl play-pause
+# Play/Pause (alternative)
+bindsym $mod+F11 exec playerctl play-pause
+# Next
+bindsym XF86AudioNext exec playerctl next
+# Next (alternative)
+bindsym $mod+F12 exec playerctl next
+# Previous
+bindsym XF86AudioPrev exec playerctl previous
+# Previous (alternative)
+bindsym $mod+F10 exec playerctl previous
+
+# Resize window (you can also use the mouse for that)
+bindsym $mod+r mode "Resize"
+
+# Resize mode
+mode "Resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # Same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # Back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Program-Related Bindings
+# Number launcher with Alt_L (Mod1)
+bindsym $mod+Mod1+0 exec nautilus
+bindsym $mod+Mod1+1 exec google-chrome
+bindsym $mod+Mod1+2 exec firefox
+bindsym $mod+Mod1+3 exec qbitorrent
+bindsym $mod+Mod1+4 exec vlc
+#bindsym $mod+Mod1+5 exec "appname"
+#bindsym $mod+Mod1+6 exec "appname"
+#bindsym $mod+Mod1+7 exec "appname"
+#bindsym $mod+Mod1+8 exec "appname"
+#bindsym $mod+Mod1+9 exec "appname"
+
+# NumPad launcher
+bindsym $mod+KP_0 exec nautilus
+bindsym $mod+KP_1 exec google-chrome
+bindsym $mod+KP_2 exec firefox
+bindsym $mod+KP_3 exec qbittorrent
+bindsym $mod+KP_4 exec vlc
+bindsym $mod+KP_5 exec atom
+#bindsym $mod+KP_6 exec "appname"
+#bindsym $mod+KP_7 exec "appname"
+#bindsym $mod+KP_8 exec "appname"
+#bindsym $mod+KP_9 exec "appname"
+
+# Application laucher mode
+set $mode_app '[e]nautilus,[f]irefox,[c]hrome,[v]lc,q[b]itorrent,gnome-[s]creenshot'
+bindsym $mod+x mode "$mode_app"
+
+mode "$mode_app" {
+        bindsym e exec nautilus, mode "default"
+        bindsym f exec firefox, mode "default"
+        bindsym c exec google-chrome, mode "default"
+        bindsym v exec vlc, mode "default"
+        bindsym b exec qbittorrent, mode "default"
+        bindsym s exec gnome-screenshot, mode "default"
+
+        # Back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# System status mode
+set $mode_system 'System [l]ock,l[o]gout,[s]uspend,[h]ibernate,[r]eboot,[p]oweroff'
+bindsym $mod+Shift+p mode "$mode_system"
+
+mode "$mode_system" {
+        bindsym l exec --no-startup-id $scripts/i3exit lock, mode "default"
+        bindsym o exec --no-startup-id $scripts/i3exit logout, mode "default"
+        bindsym s exec --no-startup-id $scripts/i3exit suspend, mode "default"
+        bindsym h exec --no-startup-id $scripts/i3exit hibernate, mode "default"
+        bindsym r exec --no-startup-id $scripts/i3exit reboot, mode "default"
+        bindsym p exec --no-startup-id $scripts/i3exit poweroff, mode "default"
+
+        # Back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Manual management of external screen
+# Command: xrandr --query
+set $mode_screen 'Ext Screen [w|s] Screen1, [e|d] Screen2, [h|j] HDMI, [v|b] VGA'
+bindsym $mod+Mod1+s mode "$mode_screen"
+
+mode "$mode_screen" {
+        bindsym w exec --no-startup-id xrandr --output $screen1 --auto --left-of $screen2, mode "default"
+        bindsym s exec --no-startup-id xrandr --output $screen1 --auto --off, mode "default"
+        bindsym e exec --no-startup-id xrandr --output $screen2 --auto --right-of $screen1, mode "default"
+        bindsym d exec --no-startup-id xrandr --output $screen2 --auto --off, mode "default"
+        bindsym h exec --no-startup-id xrandr --output $hdmi1 --auto --right-of $screen1, mode "default"
+        bindsym j exec --no-startup-id xrandr --output $hdmi1 --auto --off, mode "default"
+        bindsym v exec --no-startup-id xrandr --output $vga1 --auto --right-of $creen1, mode "default"
+        bindsym b exec --no-startup-id xrandr --output $vga1 --auto --off, mode "default"
+
+        # Back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+# Defaults configuration
+#bar {
+#        status_command i3status
+#}
+
+# i3bar configuration
+# Bar on Screen1
+bar {
+        # Bar ID
+        id 0
+
+        # Set font
+        font pango: Overpass, FontAwesome 10
+
+        # i3blocks status bar
+        status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
+
+        # Set output screen
+        output "eDP1"
+
+        # Set i3bar tray output screen
+        tray_output "eDP1"
+
+        # Bar position
+        position top
+
+        # Bar display mode
+        # Keep the bar hidden and show it when Mod1 is pressed
+        #mode hide
+        #hidden_state hide
+        #modifier Mod1
+
+        # Custom separator
+        separator_symbol ":"
+
+        # Workspace buttons
+        workspace_buttons yes
+
+        # Mouse button behavior (nop disables clicking)
+        # Mouse Scroll wheel up
+        bindsym button4 nop
+        # Mouse Scroll wheel down
+        bindsym button5 nop
+
+     colors {
+             background $bg-color
+             separator #757575
+             #                  border             background         text
+             focused_workspace  $bg-color          $bg-color          $text-color
+             inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+             urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+            }
+    }
+
+# Bar on Screen2
+bar {
+        # Bar ID
+        id 1
+
+        # Set font
+        font pango: Overpass, FontAwesome 10
+
+        # i3blocks status bar
+        status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks2.conf
+
+        # Set output screen
+        output "DP2-1"
+
+        # Set i3bar tray output screen
+        tray_output none
+
+        # Bar position
+        position top
+
+        # Bar display mode
+        # Keep the bar hidden and show it when Mod1 is pressed
+        mode hide
+
+        #hidden_state hide
+        modifier Mod1
+
+        # Custom separator
+        separator_symbol ":"
+
+        # Workspace buttons
+        workspace_buttons yes
+
+        # Mouse button behavior (nop disables clicking)
+        # Mouse Scroll wheel up
+        bindsym button4 nop
+        # Mouse Scroll wheel down
+        bindsym button5 nop
+
+     colors {
+             background $bg-color
+             separator #757575
+             #                  border             background         text
+             focused_workspace  $bg-color          $bg-color          $text-color
+             inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+             urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+            }
+    }
+
