@@ -5,8 +5,7 @@
 # PRE-REQUISITES
 # Repositories: dnf copr enable mkrawiec/i3desktop
 #               dnf copr enable jvcelak/playerctl
-# Packages: i3 i3lock i3-ipc i3status i3blocks playerctl
-#           feh compton rofi network-manager-applet
+# Packages: i3 i3lock i3-ipc i3status i3blocks playerctl feh compton rofi network-manager-applet
 # Fonts: Overpass, FontAwesome
 #
 
@@ -280,13 +279,13 @@ bindsym $mod+F4 exec "pactl set-source-mute $audio_inp1 toggle"
 
 # Screen brightness controls
 # Increase screen brightness
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 10"
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
 # Increase screen brightness (alternative)
-bindsym $mod+F6 exec "xbacklight -inc 10"
+bindsym $mod+F6 exec "xbacklight -inc 5"
 # Decrease screen brightness
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 10"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
 # Decrease screen brightness (alternative)
-bindsym $mod+F5 exec "xbacklight -dec 10"
+bindsym $mod+F5 exec "xbacklight -dec 5"
 
 # Media player controls
 # Play/Pause
@@ -336,7 +335,7 @@ bindsym $mod+Mod1+1 exec google-chrome
 bindsym $mod+Mod1+2 exec firefox
 bindsym $mod+Mod1+3 exec qbitorrent
 bindsym $mod+Mod1+4 exec vlc
-#bindsym $mod+Mod1+5 exec "appname"
+bindsym $mod+Mod1+5 exec atom
 #bindsym $mod+Mod1+6 exec "appname"
 #bindsym $mod+Mod1+7 exec "appname"
 #bindsym $mod+Mod1+8 exec "appname"
@@ -390,7 +389,7 @@ mode "$mode_system" {
 
 # Manual management of external screen
 # Command: xrandr --query
-set $mode_screen 'Ext Screen [w|s] Screen1, [e|d] Screen2, [h|j] HDMI, [v|b] VGA'
+set $mode_screen 'Ext Screen [w|s] Screen1, [e|d] Screen2, [r|f] HDMI, [t|g] VGA'
 bindsym $mod+Mod1+s mode "$mode_screen"
 
 mode "$mode_screen" {
@@ -398,10 +397,10 @@ mode "$mode_screen" {
         bindsym s exec --no-startup-id xrandr --output $screen1 --auto --off, mode "default"
         bindsym e exec --no-startup-id xrandr --output $screen2 --auto --right-of $screen1, mode "default"
         bindsym d exec --no-startup-id xrandr --output $screen2 --auto --off, mode "default"
-        bindsym h exec --no-startup-id xrandr --output $hdmi1 --auto --right-of $screen1, mode "default"
-        bindsym j exec --no-startup-id xrandr --output $hdmi1 --auto --off, mode "default"
-        bindsym v exec --no-startup-id xrandr --output $vga1 --auto --right-of $creen1, mode "default"
-        bindsym b exec --no-startup-id xrandr --output $vga1 --auto --off, mode "default"
+        bindsym r exec --no-startup-id xrandr --output $hdmi1 --auto --right-of $screen1, mode "default"
+        bindsym f exec --no-startup-id xrandr --output $hdmi1 --auto --off, mode "default"
+        bindsym t exec --no-startup-id xrandr --output $vga1 --auto --right-of $creen1, mode "default"
+        bindsym g exec --no-startup-id xrandr --output $vga1 --auto --off, mode "default"
 
         # Back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -428,10 +427,10 @@ bar {
         status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
 
         # Set output screen
-        output "eDP1"
+        output $screen1
 
         # Set i3bar tray output screen
-        tray_output "eDP1"
+        tray_output $screen1
 
         # Bar position
         position top
@@ -476,7 +475,7 @@ bar {
         status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks2.conf
 
         # Set output screen
-        output "DP2-1"
+        output $screen2
 
         # Set i3bar tray output screen
         tray_output none
