@@ -1,13 +1,38 @@
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
-# PRE-REQUISITES
-# Repositories: dnf copr enable mkrawiec/i3desktop
-#               dnf copr enable jvcelak/playerctl
-# Packages: i3 i3lock i3-ipc i3status i3blocks playerctl feh compton rofi network-manager-applet
+#
+# PRE-REQUISITES:
+# Repositories:
+# dnf copr enable mkrawiec/i3desktop
+# dnf copr enable jvcelak/playerctl
+#
+# Packages:
+# i3 i3lock i3-ipc i3status i3blocks playerctl feh compton rofi \
+# network-manager-applet terminator
+#
 # Fonts: Overpass, FontAwesome
 #
+# IMPORTANT NOTE:
+# Mapping keyboard keycodes and symbols
+# Commands: xev, xinput and xmodmap
+# It may be needed to map keycodes to symbols on the used keyboard.
+# This is especially true for multimedia keys and its XF86keysym symbols.
+# Available symbols can be seen in the XF86keysym.h source code file.
+#
+# General Steps:
+# Identify 'keycode' using xev or xinput
+# Generate symbol map configuration file: xmodmap -pke > xmodmap.conf
+# Based on XF86keysym.h, add the symbols to these keycodes
+# Add the keymap to X start: echo 'xmodmap xmodmap.conf' >> ~/.xinitrc
+# Restart X
+#
+# References:
+# http://wiki.linuxquestions.org/wiki/Configuring_keyboards
+# http://wiki.linuxquestions.org/wiki/XF86_keyboard_symbols
+# http://wiki.linuxquestions.org/wiki/Keyboard_mapping_list
+#
+
 
 # Set mod key to Super
 set $mod Mod4
@@ -53,6 +78,9 @@ set $screen1 "eDP1"
 
 # Secondary screen
 set $screen2 "DP2-1"
+
+# Other screens
+set $screen3 "DP2-2"
 
 # Additional screens
 #set $screen1 "LVDS1"
@@ -255,6 +283,7 @@ bindsym $mod+Shift+r restart
 
 # Exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "$scripts/exit_menu"
+
 
 # Volume Control for Pulse Audio (pactl list sinks)
 # Command: pactl list sinks
@@ -476,6 +505,55 @@ bar {
 
         # Set output screen
         output $screen2
+
+        # Set i3bar tray output screen
+        tray_output none
+
+        # Bar position
+        position top
+
+        # Bar display mode
+        # Keep the bar hidden and show it when Mod1 is pressed
+        mode hide
+
+        #hidden_state hide
+        modifier Mod1
+
+        # Custom separator
+        separator_symbol ":"
+
+        # Workspace buttons
+        workspace_buttons yes
+
+        # Mouse button behavior (nop disables clicking)
+        # Mouse Scroll wheel up
+        bindsym button4 nop
+        # Mouse Scroll wheel down
+        bindsym button5 nop
+
+     colors {
+             background $bg-color
+             separator #757575
+             #                  border             background         text
+             focused_workspace  $bg-color          $bg-color          $text-color
+             inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+             urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+            }
+    }
+
+# Bar on Screen3
+bar {
+        # Bar ID
+        id 2
+
+        # Set font
+        font pango: Overpass, FontAwesome 10
+
+        # i3blocks status bar
+        status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks2.conf
+
+        # Set output screen
+        output $screen3
 
         # Set i3bar tray output screen
         tray_output none
