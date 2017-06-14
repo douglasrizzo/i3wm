@@ -33,7 +33,6 @@
 # http://wiki.linuxquestions.org/wiki/Keyboard_mapping_list
 #
 
-
 # Set mod key to Super
 set $mod Mod4
 
@@ -69,30 +68,31 @@ client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-co
 client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
+# Set i3 base directory path
+set $i3_path ~/.config/i3
+
+# Set wallpaper directory
+set $wallpaper_folder ~/Pictures
+
+# Set custom scripts path
+set $scripts ~/.config/i3/scripts
+
 # Set screen names
 # Command: xrandr --current
 # Command: xrandr --query
 
 # Primary screen
-set $screen1 "eDP1"
+#set $screen1 "eDP1"
+set $screen1 "eDP-1"
 
 # Secondary screen
-set $screen2 "DP2-1"
+#set $screen2 "DP2-1"
+set $screen2 "DP-2-1"
+set $screen3 "DP-2-2"
 
 # Other screens
-set $screen3 "DP2-2"
-
-# Additional screens
-#set $screen1 "LVDS1"
-#set $screen1 "DP1"
-#set $screen1 "DP2"
-#set $screen1 "DP2-1"
-#set $screen1 "DP2-2"
-#set $screen1 "DP2-3"
-#set $hdmi1 "HDMI1"
-#set $hdmi2 "HDMI2"
-#set $vga1 "VGA1"
-#set $screen1 "LVDS1"
+#set $screen3 "DP2-2"
+set $screen4 "DP-2-3"
 
 # Set TouchPad device
 # Commands: xinput list and xinput list-props $touchpad
@@ -100,23 +100,19 @@ set $touchpad "SynPS/2 Synaptics TouchPad"
 
 # Set audio out devices
 # Command: pactl list sinks
-set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
+#set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
+set $audio_out1 alsa_output.pci-0000_00_1f.3.analog-stereo
 
 # Set audio in devices
 # Command: pactl list sources
-set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
-
-# Set wallpaper directory
-set $wallpaper ~/Pictures/wallhaven-272950.jpg
-
-# Set custom scripts path
-set $scripts ~/.config/i3/scripts/
+#set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
+set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-scale $wallpaper
+exec_always --no-startup-id feh --bg-scale $wallpaper_folder/wallhaven-64352.png
 
 # Composite window
-exec --no-startup-id compton --fading --config ~/.config/i3/compton.conf
+exec --no-startup-id compton --fading --config $i3_path/compton.conf
 
 # NetworkManager applet
 exec_always --no-startup-id nm-applet
@@ -137,7 +133,7 @@ new_window pixel 2
 
 # Start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec terminator
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -148,7 +144,6 @@ bindsym $mod+Shift+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-#bindsym $mod+d exec rofi -show run
 
 # Rofi bindings
 bindsym F9 exec rofi -show run -fg "#f1f1f1" -bg "#333333" -hlfg "#ffffff" -hlbg "#336699" -o 85
@@ -156,10 +151,11 @@ bindsym F12 exec rofi -show window -fg "#f1f1f1" -bg "#333333" -hlfg "#ffffff" -
 
 # Start rofi (alternative program launcher)
 #bindsym $mod+d exec rofi -show run
-#bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -fullscreen -opacity "90" -color-enabled -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "Overpass 12"
+#bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -fullscreen -opacity "90" \
+#-color-enabled -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "Overpass 12"
 
 # Lock screen
-bindsym $mod+Ctrl+x exec i3lock -I 15 -e -f --color 0F121B
+bindsym $mod+Ctrl+x exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png
 
 # Screensaver lock
 #exec --no-startup-id xset dpms 600
@@ -272,8 +268,8 @@ bindsym $mod+Shift+0 move container to workspace $workspace0
 for_window [class="Pavucontrol"] floating enable
 
 # Default workspaces
-#assign [class="firefox"] $workspace1
-#assign [class="google-chrome"] $workspace2
+#assign [class="google-chrome"] $workspace1
+#assign [class="firefox"] $workspace2
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -359,12 +355,12 @@ mode "Resize" {
 
 # Program-Related Bindings
 # Number launcher with Alt_L (Mod1)
-bindsym $mod+Mod1+0 exec nautilus
+bindsym $mod+Mod1+0 exec nemo
 bindsym $mod+Mod1+1 exec google-chrome
 bindsym $mod+Mod1+2 exec firefox
-bindsym $mod+Mod1+3 exec qbitorrent
+bindsym $mod+Mod1+3 exec atom
 bindsym $mod+Mod1+4 exec vlc
-bindsym $mod+Mod1+5 exec atom
+#bindsym $mod+Mod1+5 exec "appname"
 #bindsym $mod+Mod1+6 exec "appname"
 #bindsym $mod+Mod1+7 exec "appname"
 #bindsym $mod+Mod1+8 exec "appname"
@@ -374,23 +370,24 @@ bindsym $mod+Mod1+5 exec atom
 bindsym $mod+KP_0 exec nautilus
 bindsym $mod+KP_1 exec google-chrome
 bindsym $mod+KP_2 exec firefox
-bindsym $mod+KP_3 exec qbittorrent
-bindsym $mod+KP_4 exec vlc
-bindsym $mod+KP_5 exec atom
+bindsym $mod+KP_3 exec atom
+bindsym $mod+KP_4 exec smplayer
+#bindsym $mod+KP_5 exec "appname"
 #bindsym $mod+KP_6 exec "appname"
 #bindsym $mod+KP_7 exec "appname"
 #bindsym $mod+KP_8 exec "appname"
 #bindsym $mod+KP_9 exec "appname"
 
 # Application laucher mode
-set $mode_app '[e]nautilus,[f]irefox,[c]hrome,[v]lc,q[b]itorrent,gnome-[s]creenshot'
+set $mode_app '[a]tom,[e]explorer,[f]irefox,[c]hrome,[v]ideo,q[b]itorrent,[s]creenshot'
 bindsym $mod+x mode "$mode_app"
 
 mode "$mode_app" {
+        bindsym a exec atom, mode "default"
         bindsym e exec nautilus, mode "default"
         bindsym f exec firefox, mode "default"
         bindsym c exec google-chrome, mode "default"
-        bindsym v exec vlc, mode "default"
+        bindsym v exec smplayer mode "default"
         bindsym b exec qbittorrent, mode "default"
         bindsym s exec gnome-screenshot, mode "default"
 
@@ -418,27 +415,27 @@ mode "$mode_system" {
 
 # Manual management of external screen
 # Command: xrandr --query
-set $mode_screen 'Ext Screen [w|s] Screen1, [e|d] Screen2, [r|f] HDMI, [t|g] VGA'
+set $mode_screen 'Enable|Disable - [q|a] Screen1, [w|s] Screen2, [e|d] Screen3, [r|f] Screen4'
 bindsym $mod+Mod1+s mode "$mode_screen"
 
 mode "$mode_screen" {
-        bindsym w exec --no-startup-id xrandr --output $screen1 --auto --left-of $screen2, mode "default"
-        bindsym s exec --no-startup-id xrandr --output $screen1 --auto --off, mode "default"
-        bindsym e exec --no-startup-id xrandr --output $screen2 --auto --right-of $screen1, mode "default"
-        bindsym d exec --no-startup-id xrandr --output $screen2 --auto --off, mode "default"
-        bindsym r exec --no-startup-id xrandr --output $hdmi1 --auto --right-of $screen1, mode "default"
-        bindsym f exec --no-startup-id xrandr --output $hdmi1 --auto --off, mode "default"
-        bindsym t exec --no-startup-id xrandr --output $vga1 --auto --right-of $creen1, mode "default"
-        bindsym g exec --no-startup-id xrandr --output $vga1 --auto --off, mode "default"
+        bindsym q exec --no-startup-id xrandr --output $screen1 --auto --left-of $screen2, mode "default"
+        bindsym a exec --no-startup-id xrandr --output $screen1 --auto --off, mode "default"
+        bindsym w exec --no-startup-id xrandr --output $screen2 --auto --right-of $screen1, mode "default"
+        bindsym s exec --no-startup-id xrandr --output $screen2 --auto --off, mode "default"
+        bindsym e exec --no-startup-id xrandr --output $screen3 --auto --right-of $screen1, mode "default"
+        bindsym d exec --no-startup-id xrandr --output $screen3 --auto --off, mode "default"
+        bindsym r exec --no-startup-id xrandr --output $screen4 --auto --right-of $screen1, mode "default"
+        bindsym f exec --no-startup-id xrandr --output $screen4 --auto --off, mode "default"
 
         # Back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# Defaults configuration
+# Start i3bar to display a workspace bar
+# (plus the system information i3status finds out, if available)
+# Default configuration
 #bar {
 #        status_command i3status
 #}
@@ -453,7 +450,7 @@ bar {
         font pango: Overpass, FontAwesome 10
 
         # i3blocks status bar
-        status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
+        status_command i3blocks -c $i3_path/i3blocks/i3blocks.conf
 
         # Set output screen
         output $screen1
@@ -501,7 +498,7 @@ bar {
         font pango: Overpass, FontAwesome 10
 
         # i3blocks status bar
-        status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks2.conf
+        status_command i3blocks -c $i3_path/i3blocks/i3blocks2.conf
 
         # Set output screen
         output $screen2
@@ -554,6 +551,55 @@ bar {
 
         # Set output screen
         output $screen3
+
+        # Set i3bar tray output screen
+        tray_output none
+
+        # Bar position
+        position top
+
+        # Bar display mode
+        # Keep the bar hidden and show it when Mod1 is pressed
+        mode hide
+
+        #hidden_state hide
+        modifier Mod1
+
+        # Custom separator
+        separator_symbol ":"
+
+        # Workspace buttons
+        workspace_buttons yes
+
+        # Mouse button behavior (nop disables clicking)
+        # Mouse Scroll wheel up
+        bindsym button4 nop
+        # Mouse Scroll wheel down
+        bindsym button5 nop
+
+     colors {
+             background $bg-color
+             separator #757575
+             #                  border             background         text
+             focused_workspace  $bg-color          $bg-color          $text-color
+             inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+             urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+            }
+    }
+
+# Bar on Screen4
+bar {
+        # Bar ID
+        id 3
+
+        # Set font
+        font pango: Overpass, FontAwesome 10
+
+        # i3blocks status bar
+        status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks2.conf
+
+        # Set output screen
+        output $screen4
 
         # Set i3bar tray output screen
         tray_output none
