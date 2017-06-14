@@ -1,23 +1,24 @@
 #!/bin/bash
+set -x
 
 # Left click
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
-  sudo ufw enable
+  sudo systemctl start firewalld.service
 # Middle click
 elif [[ "${BLOCK_BUTTON}" -eq 2 ]]; then
-  sudo ufw reload
+  sudo systemctl restart firewalld.service
 # Right click
 elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
-  sudo ufw disable
+  sudo systemctl stop firewalld.service
 fi
 
-status=$(sudo ufw status 2>/dev/null)
+status=$(systemctl is-active firewalld.service)
 
 if [[ $? -gt 0 ]]; then
   exit
 fi
 
-if [[ "${status}" != *inactive* ]]; then
+if [[ "${status}" != "inactive" ]]; then
   echo "on"
   echo "on"
   echo ""
