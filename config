@@ -9,7 +9,7 @@
 #
 # Packages:
 # i3 i3lock i3-ipc i3status i3blocks playerctl feh compton rofi \
-# network-manager-applet terminator
+# network-manager-applet terminator smplayer mpv atom
 #
 # Fonts: Overpass, FontAwesome
 #
@@ -82,17 +82,17 @@ set $scripts ~/.config/i3/scripts
 # Command: xrandr --query
 
 # Primary screen
-#set $screen1 "eDP1"
-set $screen1 "eDP-1"
+set $screen1 "eDP1"
+#set $screen1 "eDP-1"
 
 # Secondary screen
-#set $screen2 "DP2-1"
-set $screen2 "DP-2-1"
-set $screen3 "DP-2-2"
+set $screen2 "DP2-1"
+#set $screen2 "DP-2-1"
+#set $screen3 "DP-2-2"
 
 # Other screens
-#set $screen3 "DP2-2"
-set $screen4 "DP-2-3"
+set $screen3 "DP2-2"
+#set $screen4 "DP-2-3"
 
 # Set TouchPad device
 # Commands: xinput list and xinput list-props $touchpad
@@ -100,13 +100,13 @@ set $touchpad "SynPS/2 Synaptics TouchPad"
 
 # Set audio out devices
 # Command: pactl list sinks
-#set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
-set $audio_out1 alsa_output.pci-0000_00_1f.3.analog-stereo
+set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
+#set $audio_out1 alsa_output.pci-0000_00_1f.3.analog-stereo
 
 # Set audio in devices
 # Command: pactl list sources
-#set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
-set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
+set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
+#set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
 
 # Wallpaper
 exec_always --no-startup-id feh --bg-scale $wallpaper_folder/wallhaven-64352.png
@@ -155,7 +155,7 @@ bindsym F12 exec rofi -show window -fg "#f1f1f1" -bg "#333333" -hlfg "#ffffff" -
 #-color-enabled -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "Overpass 12"
 
 # Lock screen
-bindsym $mod+Ctrl+x exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png
+bindsym $mod+Ctrl+x exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png -t
 
 # Screensaver lock
 #exec --no-startup-id xset dpms 600
@@ -354,29 +354,53 @@ mode "Resize" {
 }
 
 # Program-Related Bindings
+# Application variables for typewriter numeric keys
+set $tn_app0 "nautilus"
+set $tn_app1 "google-chrome"
+set $tn_app2 "firefox"
+set $tn_app3 "atom"
+set $tn_app4 "smplayer"
+#set $tn_app5 ""
+#set $tn_app6 ""
+#set $tn_app7 ""
+#set $tn_app8 ""
+#set $tn_app9 ""
+
+# Application variables for numeric keypad
+set $KP_app0 "nautilus"
+set $KP_app1 "google-chrome"
+set $KP_app2 "firefox"
+set $KP_app3 "atom"
+set $KP_app4 "smplayer"
+#set $KP_app5 ""
+#set $KP_app6 ""
+#set $KP_app7 ""
+#set $KP_app8 ""
+#set $KP_app9 ""
+
 # Number launcher with Alt_L (Mod1)
-bindsym $mod+Mod1+0 exec nemo
-bindsym $mod+Mod1+1 exec google-chrome
-bindsym $mod+Mod1+2 exec firefox
-bindsym $mod+Mod1+3 exec atom
-bindsym $mod+Mod1+4 exec vlc
-#bindsym $mod+Mod1+5 exec "appname"
-#bindsym $mod+Mod1+6 exec "appname"
-#bindsym $mod+Mod1+7 exec "appname"
-#bindsym $mod+Mod1+8 exec "appname"
-#bindsym $mod+Mod1+9 exec "appname"
+bindsym $mod+Mod1+0 exec $tn_app0
+bindsym $mod+Mod1+1 exec $tn_app1
+bindsym $mod+Mod1+2 exec $tn_app2
+bindsym $mod+Mod1+3 exec $tn_app3
+bindsym $mod+Mod1+4 exec $tn_app4
+#bindsym $mod+Mod1+5 exec $tn_app5
+#bindsym $mod+Mod1+6 exec $tn_app6
+#bindsym $mod+Mod1+7 exec $tn_app7
+#bindsym $mod+Mod1+8 exec $tn_app8
+#bindsym $mod+Mod1+9 exec $tn_app9
 
 # NumPad launcher
-bindsym $mod+KP_0 exec nautilus
-bindsym $mod+KP_1 exec google-chrome
-bindsym $mod+KP_2 exec firefox
-bindsym $mod+KP_3 exec atom
-bindsym $mod+KP_4 exec smplayer
-#bindsym $mod+KP_5 exec "appname"
-#bindsym $mod+KP_6 exec "appname"
-#bindsym $mod+KP_7 exec "appname"
-#bindsym $mod+KP_8 exec "appname"
-#bindsym $mod+KP_9 exec "appname"
+bindsym $mod+KP_0 exec $KP_app0
+bindsym $mod+KP_1 exec $KP_app1
+bindsym $mod+KP_2 exec $KP_app2
+bindsym $mod+KP_3 exec $KP_app3
+bindsym $mod+KP_4 exec $KP_app4
+#bindsym $mod+KP_5 exec $KP_app5
+#bindsym $mod+KP_6 exec $KP_app6
+#bindsym $mod+KP_7 exec $KP_app7
+#bindsym $mod+KP_8 exec $KP_app8
+#bindsym $mod+KP_9 exec $KP_app9
 
 # Application laucher mode
 set $mode_app '[a]tom,[e]explorer,[f]irefox,[c]hrome,[v]ideo,q[b]itorrent,[s]creenshot'
@@ -384,7 +408,7 @@ bindsym $mod+x mode "$mode_app"
 
 mode "$mode_app" {
         bindsym a exec atom, mode "default"
-        bindsym e exec nautilus, mode "default"
+        bindsym e exec nemo, mode "default"
         bindsym f exec firefox, mode "default"
         bindsym c exec google-chrome, mode "default"
         bindsym v exec smplayer mode "default"
