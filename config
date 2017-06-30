@@ -9,7 +9,7 @@
 #
 # Packages:
 # i3 i3lock i3-ipc i3status i3blocks playerctl feh compton rofi \
-# network-manager-applet terminator smplayer mpv atom
+# network-manager-applet terminator smplayer mpv atom numlockx
 #
 # Fonts: Overpass, FontAwesome
 #
@@ -61,6 +61,13 @@ set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
+# Set workspace colors
+set $ws-bg-color            #2f343f
+set $ws-inactive-bg-color   #2f343f
+set $ws-text-color          #f3f4f5
+set $ws-inactive-text-color #676E7D
+set $ws-urgent-bg-color     #E53935
+
 # Set window colors
 #                       border              background         text                 indicator
 client.focused          $bg-color           $bg-color          $text-color          #00ff00
@@ -83,16 +90,58 @@ set $scripts ~/.config/i3/scripts
 
 # Primary screen
 set $screen1 "eDP1"
-#set $screen1 "eDP-1"
 
 # Secondary screen
 set $screen2 "DP2-1"
-#set $screen2 "DP-2-1"
-#set $screen3 "DP-2-2"
 
 # Other screens
 set $screen3 "DP2-2"
-#set $screen4 "DP-2-3"
+
+# Work screens
+set $wscreen1 "eDP-1"
+set $wscreen2 "DP-2-1"
+
+# Set primary screen
+exec --no-startup-id xrandr --output $screen1 --primary --rotate normal
+
+# External screen manual management
+# Command: xrandr --query
+set $mode_screen 'Enable|Disable - [q|a] Screen1, [w|s] Screen2, [e|d] Screen3, [r|f] Screen4'
+bindsym $mod+Mod1+s mode "$mode_screen"
+
+mode "$mode_screen" {
+        bindsym q exec --no-startup-id xrandr --output $screen1 --auto --left-of $screen2, mode "default"
+        bindsym a exec --no-startup-id xrandr --output $screen1 --auto --off, mode "default"
+        bindsym w exec --no-startup-id xrandr --output $screen2 --auto --right-of $screen1, mode "default"
+        bindsym s exec --no-startup-id xrandr --output $screen2 --auto --off, mode "default"
+        bindsym e exec --no-startup-id xrandr --output $screen3 --auto --right-of $screen1, mode "default"
+        bindsym d exec --no-startup-id xrandr --output $screen3 --auto --off, mode "default"
+        bindsym r exec --no-startup-id xrandr --output $screen4 --auto --right-of $screen1, mode "default"
+        bindsym f exec --no-startup-id xrandr --output $screen4 --auto --off, mode "default"
+
+        # Back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Set work screen
+set $mode_worklayout '[W]ork Layout'
+bindsym $mod+Mod1+w mode "$mode_worklayout"
+
+mode "$mode_worklayout" {
+        bindsym q exec --no-startup-id xrandr --output $wscreen1 --auto --left-of $wscreen2, mode "default"
+        bindsym a exec --no-startup-id xrandr --output $wscreen1 --auto --off, mode "default"
+        bindsym w exec --no-startup-id xrandr --output $wscreen2 --auto --right-of $wscreen1, mode "default"
+        bindsym s exec --no-startup-id xrandr --output $wscreen2 --auto --off, mode "default"
+        bindsym e exec --no-startup-id xrandr --output $wscreen3 --auto --right-of $wscreen1, mode "default"
+        bindsym d exec --no-startup-id xrandr --output $wscreen3 --auto --off, mode "default"
+        bindsym r exec --no-startup-id xrandr --output $wscreen4 --auto --right-of $wscreen1, mode "default"
+        bindsym f exec --no-startup-id xrandr --output $wscreen4 --auto --off, mode "default"
+
+        # Back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 
 # Set TouchPad device
 # Commands: xinput list and xinput list-props $touchpad
@@ -133,7 +182,7 @@ new_window pixel 2
 
 # Start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec terminator
+bindsym $mod+Return exec gnome-terminal
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -155,7 +204,7 @@ bindsym F12 exec rofi -show window -fg "#f1f1f1" -bg "#333333" -hlfg "#ffffff" -
 #-color-enabled -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "Overpass 12"
 
 # Lock screen
-bindsym $mod+Ctrl+x exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png -t
+bindsym $mod+Ctrl+l exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png -t
 
 # Screensaver lock
 #exec --no-startup-id xset dpms 600
@@ -215,16 +264,16 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # Set workspaces variables and specific icon sets
-set $workspace1 "1: "
-set $workspace2 "2: "
-set $workspace3 "3: "
-set $workspace4 "4: "
-set $workspace5 "5: "
-set $workspace6 "6: "
-set $workspace7 "7: "
-set $workspace8 "8: "
-set $workspace9 "9: "
-set $workspace0 "0: "
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
+set $workspace4 "4: "
+set $workspace5 "5: "
+set $workspace6 "6: "
+set $workspace7 "7: "
+set $workspace8 "8: "
+set $workspace9 "9: "
+set $workspace0 "10: "
 
 # Switch back and forth between previous workspace
 workspace_auto_back_and_forth yes
@@ -264,12 +313,23 @@ bindsym $mod+Shift+0 move container to workspace $workspace0
 #workspace $workspace0 output $screen1
 
 # Floating windows
+# Command: xprop
+# Hint: After selecting a windows, search for WS_CLASS instance
 # [class="program_name"]
 for_window [class="Pavucontrol"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [title="[Pp]references$"] floating enable
 
-# Default workspaces
-#assign [class="google-chrome"] $workspace1
-#assign [class="firefox"] $workspace2
+# Assign applications default workspaces
+assign [class="google-chrome(-beta)?"] $workspace1
+assign [class="[Ff]irefox"] $workspace2
+assign [class="[Aa]tom"] $workspace3
+assign [class="[Vv]irt-manager"] $workspace6
+assign [class="[Vv]irtual[Bb]ox"] $workspace6
+assign [class="q[Bb]ittorrent"] $workspace8
+assign [class="[Hh]exchat"] $workspace9
+assign [class="[Ll]inphone"] $workspace0
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -279,7 +339,6 @@ bindsym $mod+Shift+r restart
 
 # Exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "$scripts/exit_menu"
-
 
 # Volume Control for Pulse Audio (pactl list sinks)
 # Command: pactl list sinks
@@ -437,25 +496,6 @@ mode "$mode_system" {
         bindsym Escape mode "default"
 }
 
-# Manual management of external screen
-# Command: xrandr --query
-set $mode_screen 'Enable|Disable - [q|a] Screen1, [w|s] Screen2, [e|d] Screen3, [r|f] Screen4'
-bindsym $mod+Mod1+s mode "$mode_screen"
-
-mode "$mode_screen" {
-        bindsym q exec --no-startup-id xrandr --output $screen1 --auto --left-of $screen2, mode "default"
-        bindsym a exec --no-startup-id xrandr --output $screen1 --auto --off, mode "default"
-        bindsym w exec --no-startup-id xrandr --output $screen2 --auto --right-of $screen1, mode "default"
-        bindsym s exec --no-startup-id xrandr --output $screen2 --auto --off, mode "default"
-        bindsym e exec --no-startup-id xrandr --output $screen3 --auto --right-of $screen1, mode "default"
-        bindsym d exec --no-startup-id xrandr --output $screen3 --auto --off, mode "default"
-        bindsym r exec --no-startup-id xrandr --output $screen4 --auto --right-of $screen1, mode "default"
-        bindsym f exec --no-startup-id xrandr --output $screen4 --auto --off, mode "default"
-
-        # Back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
 
 # Start i3bar to display a workspace bar
 # (plus the system information i3status finds out, if available)
@@ -478,9 +518,14 @@ bar {
 
         # Set output screen
         output $screen1
+        output $wscreen1
 
         # Set i3bar tray output screen
         tray_output $screen1
+        tray_output $wscreen1
+
+        # Fitt's law
+        tray_padding 0
 
         # Bar position
         position top
@@ -504,12 +549,12 @@ bar {
         bindsym button5 nop
 
      colors {
-             background $bg-color
-             separator #757575
-             #                  border             background         text
-             focused_workspace  $bg-color          $bg-color          $text-color
-             inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-             urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+             background $ws-bg-color
+             separator #b4b4b4
+             #                  border                background            text
+             focused_workspace  $ws-bg-color          $ws-bg-color          $ws-text-color
+             inactive_workspace $ws-inactive-bg-color $ws-inactive-bg-color $ws-inactive-text-color
+             urgent_workspace   $ws-urgent-bg-color   $ws-urgent-bg-color   $ws-text-color
             }
     }
 
@@ -526,6 +571,7 @@ bar {
 
         # Set output screen
         output $screen2
+        output $wscreen2
 
         # Set i3bar tray output screen
         tray_output none
@@ -534,11 +580,11 @@ bar {
         position top
 
         # Bar display mode
-        # Keep the bar hidden and show it when Mod1 is pressed
-        mode hide
+        # Bar modes dock|hide|invisible
+        mode dock
 
         #hidden_state hide
-        modifier Mod1
+        #modifier Mod1
 
         # Custom separator
         separator_symbol ":"
@@ -554,109 +600,11 @@ bar {
 
      colors {
              background $bg-color
-             separator #757575
-             #                  border             background         text
-             focused_workspace  $bg-color          $bg-color          $text-color
-             inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-             urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-            }
-    }
-
-# Bar on Screen3
-bar {
-        # Bar ID
-        id 2
-
-        # Set font
-        font pango: Overpass, FontAwesome 10
-
-        # i3blocks status bar
-        status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks2.conf
-
-        # Set output screen
-        output $screen3
-
-        # Set i3bar tray output screen
-        tray_output none
-
-        # Bar position
-        position top
-
-        # Bar display mode
-        # Keep the bar hidden and show it when Mod1 is pressed
-        mode hide
-
-        #hidden_state hide
-        modifier Mod1
-
-        # Custom separator
-        separator_symbol ":"
-
-        # Workspace buttons
-        workspace_buttons yes
-
-        # Mouse button behavior (nop disables clicking)
-        # Mouse Scroll wheel up
-        bindsym button4 nop
-        # Mouse Scroll wheel down
-        bindsym button5 nop
-
-     colors {
-             background $bg-color
-             separator #757575
-             #                  border             background         text
-             focused_workspace  $bg-color          $bg-color          $text-color
-             inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-             urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-            }
-    }
-
-# Bar on Screen4
-bar {
-        # Bar ID
-        id 3
-
-        # Set font
-        font pango: Overpass, FontAwesome 10
-
-        # i3blocks status bar
-        status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks2.conf
-
-        # Set output screen
-        output $screen4
-
-        # Set i3bar tray output screen
-        tray_output none
-
-        # Bar position
-        position top
-
-        # Bar display mode
-        # Keep the bar hidden and show it when Mod1 is pressed
-        mode hide
-
-        #hidden_state hide
-        modifier Mod1
-
-        # Custom separator
-        separator_symbol ":"
-
-        # Workspace buttons
-        workspace_buttons yes
-
-        # Mouse button behavior (nop disables clicking)
-        # Mouse Scroll wheel up
-        bindsym button4 nop
-        # Mouse Scroll wheel down
-        bindsym button5 nop
-
-     colors {
-             background $bg-color
-             separator #757575
-             #                  border             background         text
-             focused_workspace  $bg-color          $bg-color          $text-color
-             inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-             urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+             separator #b4b4b4
+             #                  border                background            text
+             focused_workspace  $ws-bg-color          $ws-bg-color          $ws-text-color
+             inactive_workspace $ws-inactive-bg-color $ws-inactive-bg-color $ws-inactive-text-color
+             urgent_workspace   $ws-urgent-bg-color   $ws-urgent-bg-color   $ws-text-color
             }
     }
 
