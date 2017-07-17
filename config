@@ -33,8 +33,11 @@
 # http://wiki.linuxquestions.org/wiki/Keyboard_mapping_list
 #
 
+
+# Set modifier keys
+# Command: xmodmap
 # Set mod key to Super
-set $mod Mod4
+set $sup Mod4
 
 # Set tags color for later use
 set $base00 #101218
@@ -103,7 +106,7 @@ exec --no-startup-id xrandr --output $screen1 --primary --rotate normal
 # External screen manual management
 # Command: xrandr --query
 set $mode_screen 'Enable|Disable - [q|a] Screen1, [w|s] Screen2, [e|d] Screen3, [r|f] Screen4'
-bindsym $mod+Mod1+s mode "$mode_screen"
+bindsym $sup+Mod1+s mode "$mode_screen"
 
 mode "$mode_screen" {
         bindsym q exec --no-startup-id xrandr --output $screen1 --auto --left-of $screen2, mode "default"
@@ -152,93 +155,93 @@ exec --no-startup-id xinput set-prop $touchpad "libinput Tapping Enabled" 1
 #font pango:Overpass 10
 font pango:DejaVu Sans Mono 9
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# Use Mouse+$sup to drag floating windows to their wanted position
+floating_modifier $sup
 hide_edge_borders both
 new_window pixel 2
 
 # Start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec gnome-terminal
+#bindsym $sup+Return exec i3-sensible-terminal
+bindsym $sup+Return exec gnome-terminal
 
 # Kill focused window
-bindsym $mod+Shift+q kill
+bindsym $sup+Shift+q kill
 
 # Start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
+# bindsym $sup+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $sup+d exec --no-startup-id i3-dmenu-desktop
 
 # Rofi bindings
 bindsym F9 exec rofi -show run -fg "#f1f1f1" -bg "#333333" -hlfg "#ffffff" -hlbg "#336699" -o 85
 bindsym F12 exec rofi -show window -fg "#f1f1f1" -bg "#333333" -hlfg "#ffffff" -hlbg "#336699" -o 85
 
 # Start rofi (alternative program launcher)
-#bindsym $mod+d exec rofi -show run
-#bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -fullscreen -opacity "90" \
+#bindsym $sup+d exec rofi -show run
+#bindsym $sup+d exec rofi -show run -lines 3 -eh 2 -width 100 -fullscreen -opacity "90" \
 #-color-enabled -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "Overpass 12"
 
 # Lock screen
-bindsym $mod+Ctrl+l exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png -t
+bindsym $sup+Ctrl+l exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png -t
 
 # Screensaver lock
 #exec --no-startup-id xset dpms 600
 #exec --no-startup-id xautolock -time 10 -locker i3lock -I 15 -e -f --color 0F121B
 
 # Change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $sup+j focus left
+bindsym $sup+k focus down
+bindsym $sup+l focus up
+bindsym $sup+semicolon focus right
 
 # Alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $sup+Left focus left
+bindsym $sup+Down focus down
+bindsym $sup+Up focus up
+bindsym $sup+Right focus right
 
 # Move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $sup+Shift+j move left
+bindsym $sup+Shift+k move down
+bindsym $sup+Shift+l move up
+bindsym $sup+Shift+semicolon move right
 
 # Alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $sup+Shift+Left move left
+bindsym $sup+Shift+Down move down
+bindsym $sup+Shift+Up move up
+bindsym $sup+Shift+Right move right
 
 # Split in horizontal orientation
-bindsym $mod+h split h
+bindsym $sup+h split h
 
 # Split in vertical orientation
-bindsym $mod+v split v
+bindsym $sup+v split v
 
 # Sticky window
-bindsym $mod+Shift+s sticky toggle
+bindsym $sup+Shift+s sticky toggle
 
 # Enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $sup+f fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $sup+s layout stacking
+bindsym $sup+w layout tabbed
+bindsym $sup+e layout toggle split
 
 # Toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $sup+Shift+space floating toggle
 
 # Change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $sup+space focus mode_toggle
 
 # Focus the parent container
-bindsym $mod+a focus parent
+bindsym $sup+a focus parent
 
 # Focus the child container
-#bindsym $mod+d focus child
+#bindsym $sup+d focus child
 
 # Set workspaces variables and specific icon sets
 set $workspace1 "1: "
@@ -256,28 +259,28 @@ set $workspace0 "10: "
 workspace_auto_back_and_forth yes
 
 # Switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace $workspace7
-bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace0
+bindsym $sup+1 workspace $workspace1
+bindsym $sup+2 workspace $workspace2
+bindsym $sup+3 workspace $workspace3
+bindsym $sup+4 workspace $workspace4
+bindsym $sup+5 workspace $workspace5
+bindsym $sup+6 workspace $workspace6
+bindsym $sup+7 workspace $workspace7
+bindsym $sup+8 workspace $workspace8
+bindsym $sup+9 workspace $workspace9
+bindsym $sup+0 workspace $workspace0
 
 # Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace $workspace7
-bindsym $mod+Shift+8 move container to workspace $workspace8
-bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace0
+bindsym $sup+Shift+1 move container to workspace $workspace1
+bindsym $sup+Shift+2 move container to workspace $workspace2
+bindsym $sup+Shift+3 move container to workspace $workspace3
+bindsym $sup+Shift+4 move container to workspace $workspace4
+bindsym $sup+Shift+5 move container to workspace $workspace5
+bindsym $sup+Shift+6 move container to workspace $workspace6
+bindsym $sup+Shift+7 move container to workspace $workspace7
+bindsym $sup+Shift+8 move container to workspace $workspace8
+bindsym $sup+Shift+9 move container to workspace $workspace9
+bindsym $sup+Shift+0 move container to workspace $workspace0
 
 # Workspace default screens
 #workspace $workspace1 output $screen1
@@ -309,61 +312,61 @@ assign [class="[Hh]exchat"] $workspace9
 assign [class="[Ll]inphone"] $workspace0
 
 # Reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $sup+Shift+c reload
 
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $sup+Shift+r restart
 
 # Exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "$scripts/exit_menu"
+bindsym $sup+Shift+e exec "$scripts/exit_menu"
 
 # Volume Control for Pulse Audio (pactl list sinks)
 # Command: pactl list sinks
 # Increase sound volume
 bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume $audio_out1 +5%"
 # Increase sound volume (alternative)
-bindsym $mod+F3 exec "pactl set-sink-volume $audio_out1 +5%"
+bindsym $sup+F3 exec "pactl set-sink-volume $audio_out1 +5%"
 # Decrease sound volume
 bindsym XF86AudioLowerVolume exec "pactl set-sink-volume $audio_out1 -5%"
 # Decrease sound volume (alternative)
-bindsym $mod+F2 exec "pactl set-sink-volume $audio_out1 -5%"
+bindsym $sup+F2 exec "pactl set-sink-volume $audio_out1 -5%"
 # Mute sound
 bindsym XF86AudioMute exec "pactl set-sink-mute $audio_out1 toggle"
 # Mute sound (alternative)
-bindsym $mod+F1 exec "pactl set-sink-mute $audio_out1 toggle"
+bindsym $sup+F1 exec "pactl set-sink-mute $audio_out1 toggle"
 
 # Mute microphone
 # Command: pactl list sources
 bindsym XF86AudioMicMute exec "pactl set-source-mute $audio_inp1 toggle"
 # Mute microphone (alternative)
-bindsym $mod+F4 exec "pactl set-source-mute $audio_inp1 toggle"
+bindsym $sup+F4 exec "pactl set-source-mute $audio_inp1 toggle"
 
 # Screen brightness controls
 # Increase screen brightness
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
 # Increase screen brightness (alternative)
-bindsym $mod+F6 exec "xbacklight -inc 5"
+bindsym $sup+F6 exec "xbacklight -inc 5"
 # Decrease screen brightness
 bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
 # Decrease screen brightness (alternative)
-bindsym $mod+F5 exec "xbacklight -dec 5"
+bindsym $sup+F5 exec "xbacklight -dec 5"
 
 # Media player controls
 # Play/Pause
 bindsym XF86AudioPlay exec playerctl play-pause
 # Play/Pause (alternative)
-bindsym $mod+F11 exec playerctl play-pause
+bindsym $sup+F11 exec playerctl play-pause
 # Next
 bindsym XF86AudioNext exec playerctl next
 # Next (alternative)
-bindsym $mod+F12 exec playerctl next
+bindsym $sup+F12 exec playerctl next
 # Previous
 bindsym XF86AudioPrev exec playerctl previous
 # Previous (alternative)
-bindsym $mod+F10 exec playerctl previous
+bindsym $sup+F10 exec playerctl previous
 
 # Resize window (you can also use the mouse for that)
-bindsym $mod+r mode "Resize"
+bindsym $sup+r mode "Resize"
 
 # Resize mode
 mode "Resize" {
@@ -415,32 +418,32 @@ set $KP_app4 "smplayer"
 #set $KP_app9 ""
 
 # Number launcher with Alt_L (Mod1)
-bindsym $mod+Mod1+0 exec $tn_app0
-bindsym $mod+Mod1+1 exec $tn_app1
-bindsym $mod+Mod1+2 exec $tn_app2
-bindsym $mod+Mod1+3 exec $tn_app3
-bindsym $mod+Mod1+4 exec $tn_app4
-#bindsym $mod+Mod1+5 exec $tn_app5
-#bindsym $mod+Mod1+6 exec $tn_app6
-#bindsym $mod+Mod1+7 exec $tn_app7
-#bindsym $mod+Mod1+8 exec $tn_app8
-#bindsym $mod+Mod1+9 exec $tn_app9
+bindsym $sup+Mod1+0 exec $tn_app0
+bindsym $sup+Mod1+1 exec $tn_app1
+bindsym $sup+Mod1+2 exec $tn_app2
+bindsym $sup+Mod1+3 exec $tn_app3
+bindsym $sup+Mod1+4 exec $tn_app4
+#bindsym $sup+Mod1+5 exec $tn_app5
+#bindsym $sup+Mod1+6 exec $tn_app6
+#bindsym $sup+Mod1+7 exec $tn_app7
+#bindsym $sup+Mod1+8 exec $tn_app8
+#bindsym $sup+Mod1+9 exec $tn_app9
 
 # NumPad launcher
-bindsym $mod+KP_0 exec $KP_app0
-bindsym $mod+KP_1 exec $KP_app1
-bindsym $mod+KP_2 exec $KP_app2
-bindsym $mod+KP_3 exec $KP_app3
-bindsym $mod+KP_4 exec $KP_app4
-#bindsym $mod+KP_5 exec $KP_app5
-#bindsym $mod+KP_6 exec $KP_app6
-#bindsym $mod+KP_7 exec $KP_app7
-#bindsym $mod+KP_8 exec $KP_app8
-#bindsym $mod+KP_9 exec $KP_app9
+bindsym $sup+KP_0 exec $KP_app0
+bindsym $sup+KP_1 exec $KP_app1
+bindsym $sup+KP_2 exec $KP_app2
+bindsym $sup+KP_3 exec $KP_app3
+bindsym $sup+KP_4 exec $KP_app4
+#bindsym $sup+KP_5 exec $KP_app5
+#bindsym $sup+KP_6 exec $KP_app6
+#bindsym $sup+KP_7 exec $KP_app7
+#bindsym $sup+KP_8 exec $KP_app8
+#bindsym $sup+KP_9 exec $KP_app9
 
 # Application laucher mode
 set $mode_app '[a]tom,[e]explorer,[f]irefox,[c]hrome,[v]ideo,q[b]itorrent,[s]creenshot'
-bindsym $mod+x mode "$mode_app"
+bindsym $sup+x mode "$mode_app"
 
 mode "$mode_app" {
         bindsym a exec atom, mode "default"
@@ -458,7 +461,7 @@ mode "$mode_app" {
 
 # System status mode
 set $mode_system 'System [l]ock,l[o]gout,[s]uspend,[h]ibernate,[r]eboot,[p]oweroff'
-bindsym $mod+Shift+p mode "$mode_system"
+bindsym $sup+Shift+p mode "$mode_system"
 
 mode "$mode_system" {
         bindsym l exec --no-startup-id $scripts/i3exit lock, mode "default"
