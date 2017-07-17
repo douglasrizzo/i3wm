@@ -89,17 +89,13 @@ set $scripts ~/.config/i3/scripts
 # Command: xrandr --query
 
 # Primary screen
-set $screen1 "eDP1"
+set $screen1 "eDP-1"
 
 # Secondary screen
-set $screen2 "DP2-1"
+set $screen2 "DP-2-1"
 
 # Other screens
-set $screen3 "DP2-2"
-
-# Work screens
-set $wscreen1 "eDP-1"
-set $wscreen2 "DP-2-1"
+set $screen3 "DP-2-2"
 
 # Set primary screen
 exec --no-startup-id xrandr --output $screen1 --primary --rotate normal
@@ -118,25 +114,6 @@ mode "$mode_screen" {
         bindsym d exec --no-startup-id xrandr --output $screen3 --auto --off, mode "default"
         bindsym r exec --no-startup-id xrandr --output $screen4 --auto --right-of $screen1, mode "default"
         bindsym f exec --no-startup-id xrandr --output $screen4 --auto --off, mode "default"
-
-        # Back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-# Set work screen
-set $mode_worklayout '[W]ork Layout'
-bindsym $mod+Mod1+w mode "$mode_worklayout"
-
-mode "$mode_worklayout" {
-        bindsym q exec --no-startup-id xrandr --output $wscreen1 --auto --left-of $wscreen2, mode "default"
-        bindsym a exec --no-startup-id xrandr --output $wscreen1 --auto --off, mode "default"
-        bindsym w exec --no-startup-id xrandr --output $wscreen2 --auto --right-of $wscreen1, mode "default"
-        bindsym s exec --no-startup-id xrandr --output $wscreen2 --auto --off, mode "default"
-        bindsym e exec --no-startup-id xrandr --output $wscreen3 --auto --right-of $wscreen1, mode "default"
-        bindsym d exec --no-startup-id xrandr --output $wscreen3 --auto --off, mode "default"
-        bindsym r exec --no-startup-id xrandr --output $wscreen4 --auto --right-of $wscreen1, mode "default"
-        bindsym f exec --no-startup-id xrandr --output $wscreen4 --auto --off, mode "default"
 
         # Back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -518,11 +495,9 @@ bar {
 
         # Set output screen
         output $screen1
-        output $wscreen1
 
         # Set i3bar tray output screen
         tray_output $screen1
-        tray_output $wscreen1
 
         # Fitt's law
         tray_padding 0
@@ -571,7 +546,6 @@ bar {
 
         # Set output screen
         output $screen2
-        output $wscreen2
 
         # Set i3bar tray output screen
         tray_output none
