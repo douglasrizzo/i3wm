@@ -58,6 +58,8 @@
 # Command: xmodmap
 # Set mod key to Super
 set $sup Mod4
+
+# Set alternate mod key
 set $alt Mod1
 set $numlk Mod2
 
