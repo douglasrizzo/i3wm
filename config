@@ -16,6 +16,7 @@
 # IMPORTANT NOTE:
 # Mapping keyboard keycodes and symbols
 # Commands: xev, xinput and xmodmap
+#
 # It may be needed to map keycodes to symbols on the used keyboard.
 # This is especially true for multimedia keys and its XF86keysym symbols.
 # Available symbols can be seen in the XF86keysym.h source code file.
@@ -32,12 +33,33 @@
 # http://wiki.linuxquestions.org/wiki/XF86_keyboard_symbols
 # http://wiki.linuxquestions.org/wiki/Keyboard_mapping_list
 #
-
+# Keyboard Bindings Basics:
+# keysym (key symbol) - if you don’t switch layouts, and want a clean
+#                       and simple config file, use keysyms.
+# keycodes - if you often switch keyboard layouts but you want to keep
+#            your bindings in the same physical location on the keyboard,
+#            use keycodes
+#
+# Syntax:
+# bindsym [--release] [<Group>+][<Modifiers>+]<keysym> command
+# bindcode [--release] [<Group>+][<Modifiers>+]<keycode> command
+#
+# Tips:
+# --no-startup-id - disables startup notifications for the window.
+# They are used to properly launch windows on the right workspace when
+# starting and to display an hourglass mouse pointer while startup is
+# in progress. In this case you’d end up with an hourglass mouse pointer
+# for 60 seconds.
+# --release - execute the command *only* after the keys have been released.
+# it must be used for commands like import and xdotool, which are unable
+# to run upon KeyPress event.
 
 # Set modifier keys
 # Command: xmodmap
 # Set mod key to Super
 set $sup Mod4
+set $alt Mod1
+set $numlk Mod2
 
 # Set tags color for later use
 set $base00 #101218
@@ -83,6 +105,9 @@ set $i3_path ~/.config/i3
 
 # Set wallpaper directory
 set $wallpaper_folder ~/Pictures
+
+# Set wallpaper directory
+set $screenshot_folder ~/Pictures
 
 # Set custom scripts path
 set $scripts ~/.config/i3/scripts
@@ -301,16 +326,6 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [title="[Pp]references$"] floating enable
 
-# Assign applications default workspaces
-assign [class="google-chrome(-beta)?"] $workspace1
-assign [class="[Ff]irefox"] $workspace2
-assign [class="[Aa]tom"] $workspace3
-assign [class="[Vv]irt-manager"] $workspace6
-assign [class="[Vv]irtual[Bb]ox"] $workspace6
-assign [class="q[Bb]ittorrent"] $workspace8
-assign [class="[Hh]exchat"] $workspace9
-assign [class="[Ll]inphone"] $workspace0
-
 # Reload the configuration file
 bindsym $sup+Shift+c reload
 
@@ -392,6 +407,17 @@ mode "Resize" {
         bindsym Escape mode "default"
 }
 
+# Assign applications default workspaces
+assign [class="[Gg]oogle-chrome(-beta)?"] $workspace1
+assign [class="[Ff]irefox"] $workspace2
+assign [class="[Aa]tom"] $workspace3
+assign [class="[Vv]irt-manager"] $workspace6
+assign [class="[Vv]irtual[Bb]ox"] $workspace6
+assign [class="q[Bb]ittorrent"] $workspace8
+assign [class="[Hh]exchat"] $workspace9
+assign [class="[Aa]utokey-gtk"] $workspace9
+assign [class="[Ll]inphone"] $workspace0
+
 # Program-Related Bindings
 # Application variables for typewriter numeric keys
 set $tn_app0 "nautilus"
@@ -410,19 +436,22 @@ set $KP_app0 "nautilus"
 set $KP_app1 "google-chrome"
 set $KP_app2 "firefox"
 set $KP_app3 "atom"
-set $KP_app4 "smplayer"
+set $KP_app4 "hexchat"
 #set $KP_app5 ""
 #set $KP_app6 ""
 #set $KP_app7 ""
 #set $KP_app8 ""
 #set $KP_app9 ""
 
+# Prinscreen select are
+bindsym --release $sup+Print exec --no-startup-id "import $screenshot_folder/screenshot_`date +%Y%M%d_%H%m%S`.png"
+
 # Number launcher with Alt_L (Mod1)
-bindsym $sup+Mod1+0 exec $tn_app0
-bindsym $sup+Mod1+1 exec $tn_app1
-bindsym $sup+Mod1+2 exec $tn_app2
-bindsym $sup+Mod1+3 exec $tn_app3
-bindsym $sup+Mod1+4 exec $tn_app4
+bindsym $alt+0 exec --no-startup-id $tn_app0
+bindsym $alt+1 exec --no-startup-id $tn_app1
+bindsym $alt+2 exec --no-startup-id $tn_app2
+bindsym $alt+3 exec --no-startup-id $tn_app3
+bindsym $alt+4 exec --no-startup-id $tn_app4
 #bindsym $sup+Mod1+5 exec $tn_app5
 #bindsym $sup+Mod1+6 exec $tn_app6
 #bindsym $sup+Mod1+7 exec $tn_app7
@@ -430,11 +459,11 @@ bindsym $sup+Mod1+4 exec $tn_app4
 #bindsym $sup+Mod1+9 exec $tn_app9
 
 # NumPad launcher
-bindsym $sup+KP_0 exec $KP_app0
-bindsym $sup+KP_1 exec $KP_app1
-bindsym $sup+KP_2 exec $KP_app2
-bindsym $sup+KP_3 exec $KP_app3
-bindsym $sup+KP_4 exec $KP_app4
+bindsym $numlk+KP_0 exec --no-startup-id $KP_app0
+bindsym $numlk+KP_1 exec --no-startup-id $KP_app1
+bindsym $numlk+KP_2 exec --no-startup-id $KP_app2
+bindsym $numlk+KP_3 exec --no-startup-id $KP_app3
+bindsym $numlk+KP_4 exec --no-startup-id $KP_app4
 #bindsym $sup+KP_5 exec $KP_app5
 #bindsym $sup+KP_6 exec $KP_app6
 #bindsym $sup+KP_7 exec $KP_app7
