@@ -15,14 +15,14 @@
 #
 # IMPORTANT NOTE:
 # Mapping keyboard keycodes and symbols
-# Commands: xev, xinput and xmodmap
+# Commands: xev (-event keyboard), xinput and xmodmap
 #
 # It may be needed to map keycodes to symbols on the used keyboard.
 # This is especially true for multimedia keys and its XF86keysym symbols.
 # Available symbols can be seen in the XF86keysym.h source code file.
 #
 # General Steps:
-# Identify 'keycode' using xev or xinput
+# Identify 'keycode' using 'xev -event keyboard' or xinput
 # Generate symbol map configuration file: xmodmap -pke > xmodmap.conf
 # Based on XF86keysym.h, add the symbols to these keycodes
 # Add the keymap to X start: echo 'xmodmap xmodmap.conf' >> ~/.xinitrc
@@ -62,6 +62,8 @@ set $sup Mod4
 # Set alternate mod key
 set $alt Mod1
 set $numlk Mod2
+set $ctrl Control
+set $altgr Mod5
 
 # Set tags color for later use
 set $base00 #101218
@@ -189,10 +191,10 @@ new_window pixel 2
 
 # Start a terminal
 #bindsym $sup+Return exec i3-sensible-terminal
-bindsym $sup+Return exec gnome-terminal
+bindsym $sup+Return exec --no-startup-id terminator
 
 # Kill focused window
-bindsym $sup+Shift+q kill
+bindsym $sup+Escape kill
 
 # Start dmenu (a program launcher)
 # bindsym $sup+d exec dmenu_run
@@ -461,16 +463,16 @@ bindsym $alt+4 exec --no-startup-id $tn_app4
 #bindsym $sup+Mod1+9 exec $tn_app9
 
 # NumPad launcher
-bindsym $numlk+KP_0 exec --no-startup-id $KP_app0
-bindsym $numlk+KP_1 exec --no-startup-id $KP_app1
-bindsym $numlk+KP_2 exec --no-startup-id $KP_app2
-bindsym $numlk+KP_3 exec --no-startup-id $KP_app3
-bindsym $numlk+KP_4 exec --no-startup-id $KP_app4
-#bindsym $sup+KP_5 exec $KP_app5
-#bindsym $sup+KP_6 exec $KP_app6
-#bindsym $sup+KP_7 exec $KP_app7
-#bindsym $sup+KP_8 exec $KP_app8
-#bindsym $sup+KP_9 exec $KP_app9
+bindsym $altgr+KP_Insert exec --no-startup-id $KP_app0
+bindsym $altgr+KP_End exec --no-startup-id $KP_app1
+bindsym $altgr+KP_Down exec --no-startup-id $KP_app2
+bindsym $altgr+KP_Next exec --no-startup-id $KP_app3
+bindsym $altgr+KP_Left exec --no-startup-id $KP_app4
+#bindsym $sup+KP_Begin exec $KP_app5
+#bindsym $sup+KP_Right exec $KP_app6
+#bindsym $sup+KP_Home exec $KP_app7
+#bindsym $sup+KP_Up exec $KP_app8
+#bindsym $sup+KP_Prior exec $KP_app9
 
 # Application laucher mode
 set $mode_app '[a]tom,[e]explorer,[f]irefox,[c]hrome,[v]ideo,q[b]itorrent,[s]creenshot'
@@ -492,7 +494,7 @@ mode "$mode_app" {
 
 # System status mode
 set $mode_system 'System [l]ock,l[o]gout,[s]uspend,[h]ibernate,[r]eboot,[p]oweroff'
-bindsym $sup+Shift+p mode "$mode_system"
+bindsym $altgr+BackSpace mode "$mode_system"
 
 mode "$mode_system" {
         bindsym l exec --no-startup-id $scripts/i3exit lock, mode "default"
@@ -506,7 +508,6 @@ mode "$mode_system" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
 
 # Start i3bar to display a workspace bar
 # (plus the system information i3status finds out, if available)
@@ -580,6 +581,7 @@ bar {
 
         # Set output screen
         output $screen2
+        output $screen3
 
         # Set i3bar tray output screen
         tray_output none
