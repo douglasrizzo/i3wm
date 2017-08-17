@@ -99,10 +99,10 @@ set $ws-urgent-bg-color     #E53935
 
 # Set window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+client.focused          $bg-color           $bg-color          $text-color          $base0F
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $base0F
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $base0F
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $base0F
 
 # Set i3 base directory path
 set $i3_path ~/.config/i3
@@ -143,7 +143,7 @@ mode "$mode_screen" {
         bindsym a exec --no-startup-id xrandr --output $screen1 --auto --off, mode "default"
         bindsym w exec --no-startup-id xrandr --output $screen2 --auto --right-of $screen1, mode "default"
         bindsym s exec --no-startup-id xrandr --output $screen2 --auto --off, mode "default"
-        bindsym e exec --no-startup-id xrandr --output $screen3 --auto --right-of $screen1, mode "default"
+        bindsym e exec --no-startup-id xrandr --output $screen3 --auto --left-of $screen1, mode "default"
         bindsym d exec --no-startup-id xrandr --output $screen3 --auto --off, mode "default"
         bindsym r exec --no-startup-id xrandr --output $screen4 --auto --left-of $screen1, mode "default"
         bindsym f exec --no-startup-id xrandr --output $screen4 --auto --off, mode "default"
@@ -205,8 +205,8 @@ bindsym $sup+Escape kill
 bindsym $sup+d exec --no-startup-id i3-dmenu-desktop
 
 # Rofi bindings
-bindsym F9 exec rofi -show run -fg "#f1f1f1" -bg "#333333" -hlfg "#ffffff" -hlbg "#336699" -o 85
-bindsym F12 exec rofi -show window -fg "#f1f1f1" -bg "#333333" -hlfg "#ffffff" -hlbg "#336699" -o 85
+bindsym F9 exec rofi -show run -lines 5 -eh 2 -width 100 -padding 10 -opacity "80" -columns 2 -font "Overpass 14"
+bindsym F12 exec rofi -show window -lines 5 -eh 2 -width 100 -padding 1 -opacity "80" -columns 2 -font "Overpass 14"
 
 # Start rofi (alternative program launcher)
 #bindsym $sup+d exec rofi -show run
