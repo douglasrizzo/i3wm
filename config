@@ -139,18 +139,18 @@ set $mode_screen 'Enable|Disable - [q|a] Screen1, [w|s] Screen2, [e|d] Screen3, 
 bindsym $sup+Mod1+s mode "$mode_screen"
 
 mode "$mode_screen" {
-     bindsym q exec --no-startup-id xrandr --output $screen1 --auto --left-of $screen2, mode "default"
-     bindsym a exec --no-startup-id xrandr --output $screen1 --auto --off, mode "default"
-     bindsym w exec --no-startup-id xrandr --output $screen2 --auto --right-of $screen1, mode "default"
-     bindsym s exec --no-startup-id xrandr --output $screen2 --auto --off, mode "default"
-     bindsym e exec --no-startup-id xrandr --output $screen3 --auto --left-of $screen1, mode "default"
-     bindsym d exec --no-startup-id xrandr --output $screen3 --auto --off, mode "default"
-     bindsym r exec --no-startup-id xrandr --output $screen4 --auto --left-of $screen1, mode "default"
-     bindsym f exec --no-startup-id xrandr --output $screen4 --auto --off, mode "default"
+      bindsym q exec --no-startup-id xrandr --output $screen1 --auto --left-of $screen2, mode "default"
+      bindsym a exec --no-startup-id xrandr --output $screen1 --auto --off, mode "default"
+      bindsym w exec --no-startup-id xrandr --output $screen2 --auto --right-of $screen1, mode "default"
+      bindsym s exec --no-startup-id xrandr --output $screen2 --auto --off, mode "default"
+      bindsym e exec --no-startup-id xrandr --output $screen3 --auto --left-of $screen1, mode "default"
+      bindsym d exec --no-startup-id xrandr --output $screen3 --auto --off, mode "default"
+      bindsym r exec --no-startup-id xrandr --output $screen4 --auto --left-of $screen1, mode "default"
+      bindsym f exec --no-startup-id xrandr --output $screen4 --auto --off, mode "default"
 
-     # Back to normal: Enter or Escape
-     bindsym Return mode "default"
-     bindsym Escape mode "default"
+      # Back to normal: Enter or Escape
+      bindsym Return mode "default"
+      bindsym Escape mode "default"
 }
 
 # Set TouchPad device
@@ -404,26 +404,26 @@ bindsym $sup+r mode "Resize"
 
 # Resize mode
 mode "Resize" {
-     # These bindings trigger as soon as you enter the resize mode
+      # These bindings trigger as soon as you enter the resize mode
 
-     # Pressing left will shrink the window’s width.
-     # Pressing right will grow the window’s width.
-     # Pressing up will shrink the window’s height.
-     # Pressing down will grow the window’s height.
-     bindsym j resize shrink width 10 px or 10 ppt
-     bindsym k resize grow height 10 px or 10 ppt
-     bindsym l resize shrink height 10 px or 10 ppt
-     bindsym semicolon resize grow width 10 px or 10 ppt
+      # Pressing left will shrink the window’s width.
+      # Pressing right will grow the window’s width.
+      # Pressing up will shrink the window’s height.
+      # Pressing down will grow the window’s height.
+      bindsym j resize shrink width 10 px or 10 ppt
+      bindsym k resize grow height 10 px or 10 ppt
+      bindsym l resize shrink height 10 px or 10 ppt
+      bindsym semicolon resize grow width 10 px or 10 ppt
 
-     # Same bindings, but for the arrow keys
-     bindsym Left resize shrink width 10 px or 10 ppt
-     bindsym Down resize grow height 10 px or 10 ppt
-     bindsym Up resize shrink height 10 px or 10 ppt
-     bindsym Right resize grow width 10 px or 10 ppt
+      # Same bindings, but for the arrow keys
+      bindsym Left resize shrink width 10 px or 10 ppt
+      bindsym Down resize grow height 10 px or 10 ppt
+      bindsym Up resize shrink height 10 px or 10 ppt
+      bindsym Right resize grow width 10 px or 10 ppt
 
-     # Back to normal: Enter or Escape
-     bindsym Return mode "default"
-     bindsym Escape mode "default"
+      # Back to normal: Enter or Escape
+      bindsym Return mode "default"
+      bindsym Escape mode "default"
 }
 
 # Assign applications default workspaces
@@ -494,17 +494,17 @@ set $mode_app '[a]tom,[e]explorer,[f]irefox,[c]hrome,[v]ideo,q[b]itorrent,[s]cre
 bindsym $sup+x mode "$mode_app"
 
 mode "$mode_app" {
-     bindsym a exec atom, mode "default"
-     bindsym e exec nemo, mode "default"
-     bindsym f exec firefox, mode "default"
-     bindsym c exec google-chrome, mode "default"
-     bindsym v exec smplayer mode "default"
-     bindsym b exec qbittorrent, mode "default"
-     bindsym s exec gnome-screenshot, mode "default"
+      bindsym a exec atom, mode "default"
+      bindsym e exec nemo, mode "default"
+      bindsym f exec firefox, mode "default"
+      bindsym c exec google-chrome, mode "default"
+      bindsym v exec smplayer mode "default"
+      bindsym b exec qbittorrent, mode "default"
+      bindsym s exec gnome-screenshot, mode "default"
 
-     # Back to normal: Enter or Escape
-     bindsym Return mode "default"
-     bindsym Escape mode "default"
+      # Back to normal: Enter or Escape
+      bindsym Return mode "default"
+      bindsym Escape mode "default"
 }
 
 # System status mode
@@ -512,16 +512,16 @@ set $mode_system 'System [l]ock,l[o]gout,[s]uspend,[h]ibernate,[r]eboot,[p]owero
 bindsym $altgr+BackSpace mode "$mode_system"
 
 mode "$mode_system" {
-     bindsym l exec --no-startup-id $scripts/i3exit lock, mode "default"
-     bindsym o exec --no-startup-id $scripts/i3exit logout, mode "default"
-     bindsym s exec --no-startup-id $scripts/i3exit suspend, mode "default"
-     bindsym h exec --no-startup-id $scripts/i3exit hibernate, mode "default"
-     bindsym r exec --no-startup-id $scripts/i3exit reboot, mode "default"
-     bindsym p exec --no-startup-id $scripts/i3exit poweroff, mode "default"
+      bindsym l exec --no-startup-id $scripts/i3exit lock, mode "default"
+      bindsym o exec --no-startup-id $scripts/i3exit logout, mode "default"
+      bindsym s exec --no-startup-id $scripts/i3exit suspend, mode "default"
+      bindsym h exec --no-startup-id $scripts/i3exit hibernate, mode "default"
+      bindsym r exec --no-startup-id $scripts/i3exit reboot, mode "default"
+      bindsym p exec --no-startup-id $scripts/i3exit poweroff, mode "default"
 
-     # Back to normal: Enter or Escape
-     bindsym Return mode "default"
-     bindsym Escape mode "default"
+      # Back to normal: Enter or Escape
+      bindsym Return mode "default"
+      bindsym Escape mode "default"
 }
 
 # Start i3bar to display a workspace bar
@@ -534,100 +534,100 @@ mode "$mode_system" {
 # i3bar configuration
 # Bar on Screen1
 bar {
-     # Bar ID
-     id 0
+      # Bar ID
+      id 0
 
-     # Set font
-     font pango: Overpass, FontAwesome 10
+      # Set font
+      font pango: Overpass, FontAwesome 10
 
-     # py3status status bar
-     status_command py3status -c $i3_path/i3status.conf
+      # py3status status bar
+      status_command py3status -c $i3_path/i3status.conf
 
-     # Set output screen
-     output $screen1
+      # Set output screen
+      output $screen1
 
-     # Set i3bar tray output screen
-     tray_output $screen1
+      # Set i3bar tray output screen
+      tray_output $screen1
 
-     # Fitt's law
-     tray_padding 0
+      # Fitt's law
+      tray_padding 0
 
-     # Bar position
-     position top
+      # Bar position
+      position top
 
-     # Bar display mode
-     # Keep the bar hidden and show it when Mod1 is pressed
-     #mode hide
-     #hidden_state hide
-     #modifier Mod1
+      # Bar display mode
+      # Keep the bar hidden and show it when Mod1 is pressed
+      #mode hide
+      #hidden_state hide
+      #modifier Mod1
 
-     # Custom separator
-     separator_symbol ":"
+      # Custom separator
+      separator_symbol ":"
 
-     # Workspace buttons
-     workspace_buttons yes
+      # Workspace buttons
+      workspace_buttons yes
 
-     # Mouse button behavior (nop disables clicking)
-     # Mouse Scroll wheel up
-     bindsym button4 nop
-     # Mouse Scroll wheel down
-     bindsym button5 nop
+      # Mouse button behavior (nop disables clicking)
+      # Mouse Scroll wheel up
+      bindsym button4 nop
+      # Mouse Scroll wheel down
+      bindsym button5 nop
 
-  colors {
-     background $ws-bg-color
-     separator #b4b4b4
-     #                  border                background            text
-     focused_workspace  $ws-bg-color          $ws-bg-color          $ws-text-color
-     inactive_workspace $ws-inactive-bg-color $ws-inactive-bg-color $ws-inactive-text-color
-     urgent_workspace   $ws-urgent-bg-color   $ws-urgent-bg-color   $ws-text-color
-  }
+   colors {
+      background $ws-bg-color
+      separator #b4b4b4
+      #                  border                background            text
+      focused_workspace  $ws-bg-color          $ws-bg-color          $ws-text-color
+      inactive_workspace $ws-inactive-bg-color $ws-inactive-bg-color $ws-inactive-text-color
+      urgent_workspace   $ws-urgent-bg-color   $ws-urgent-bg-color   $ws-text-color
+   }
 }
 
 # Bar on Screen2
 bar {
-     # Bar ID
-     id 1
+      # Bar ID
+      id 1
 
-     # Set font
-     font pango: Overpass, FontAwesome 10
+      # Set font
+      font pango: Overpass, FontAwesome 10
 
-     # Set output screen
-     output $screen2
-     output $screen3
-     output $screen4
+      # Set output screen
+      output $screen2
+      output $screen3
+      output $screen4
 
-     # Set i3bar tray output screen
-     tray_output none
+      # Set i3bar tray output screen
+      tray_output none
 
-     # Bar position
-     position top
+      # Bar position
+      position top
 
-     # Bar display mode
-     # Bar modes dock|hide|invisible
-     mode dock
+      # Bar display mode
+      # Bar modes dock|hide|invisible
+      mode dock
 
-     #hidden_state hide
-     #modifier Mod1
+      #hidden_state hide
+      #modifier Mod1
 
-     # Custom separator
-     separator_symbol ":"
+      # Custom separator
+      separator_symbol ":"
 
-     # Workspace buttons
-     workspace_buttons yes
+      # Workspace buttons
+      workspace_buttons yes
 
-     # Mouse button behavior (nop disables clicking)
-     # Mouse Scroll wheel up
-     bindsym button4 nop
-     # Mouse Scroll wheel down
-     bindsym button5 nop
+      # Mouse button behavior (nop disables clicking)
+      # Mouse Scroll wheel up
+      bindsym button4 nop
+      # Mouse Scroll wheel down
+      bindsym button5 nop
 
-  colors {
-             background $bg-color
-             separator #b4b4b4
-             #                  border                background            text
-             focused_workspace  $ws-bg-color          $ws-bg-color          $ws-text-color
-             inactive_workspace $ws-inactive-bg-color $ws-inactive-bg-color $ws-inactive-text-color
-             urgent_workspace   $ws-urgent-bg-color   $ws-urgent-bg-color   $ws-text-color
-  }
+   colors {
+      background $bg-color
+      separator #b4b4b4
+      #                  border                background            text
+      focused_workspace  $ws-bg-color          $ws-bg-color          $ws-text-color
+      inactive_workspace $ws-inactive-bg-color $ws-inactive-bg-color $ws-inactive-text-color
+      urgent_workspace   $ws-urgent-bg-color   $ws-urgent-bg-color   $ws-text-color
+   }
 }
 
