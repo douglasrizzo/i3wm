@@ -168,10 +168,10 @@ set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
 #set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-scale $wallpaper_folder/wallhaven-64352.png
+exec_always --no-startup-id feh --bg-scale $wallpaper_folder/wallhaven-543307.jpg
 
 # Composite window
-exec --no-startup-id compton --fading --config $i3_path/compton.conf
+exec_always --no-startup-id compton --config $i3_path/compton.conf
 
 # NetworkManager applet
 exec_always --no-startup-id nm-applet
