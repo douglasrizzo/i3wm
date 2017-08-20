@@ -322,15 +322,6 @@ bindsym $sup+Shift+0 move container to workspace $workspace0
 #workspace $workspace9 output $screen1
 #workspace $workspace0 output $screen1
 
-# Floating windows
-# Command: xprop
-# Hint: After selecting a windows, search for WS_CLASS instance
-# [class="program_name"]
-for_window [class="Pavucontrol"] floating enable
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [title="[Pp]references$"] floating enable
-
 # Reload the configuration file
 bindsym $sup+Shift+c reload
 
@@ -425,6 +416,17 @@ mode "Resize" {
       bindsym Return mode "default"
       bindsym Escape mode "default"
 }
+
+# Floating windows
+# Command: xprop
+# Hint: After selecting a windows, search for WS_CLASS instance
+# [class="program_name"]
+for_window [class="Pavucontrol"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [title="[Pp]references$"] floating enable
+for_window [class="[Ff]ile-roller$"] floating enable
+for_window [class="[Nn]autilus$"] floating enable
 
 # Assign applications default workspaces
 assign [class="[Gg]oogle-chrome(-beta)?"] $workspace1
