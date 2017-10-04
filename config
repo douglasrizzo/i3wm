@@ -158,13 +158,22 @@ mode "$mode_screen" {
 
 # External screen script layout
 # Command: ARandR
-set $mode_display 'Display mode laptop [1-3]'
+set $mode_display 'Display - Home [qaz] | Work [wsx] | WFH [edc]'
 bindsym $sup+Mod1+d mode "$mode_display"
 
 mode "$mode_display" {
-      bindsym 1 exec $screenlayout/displays_home0.sh, mode "default"
-      bindsym 2 exec $screenlayout/displays_home1.sh, mode "default"
-      bindsym 3 exec $screenlayout/displays_home2.sh, mode "default"
+      bindsym q exec $screenlayout/displays_home1.sh, mode "default"
+      bindsym a exec $screenlayout/displays_home2.sh, mode "default"
+      bindsym z exec $screenlayout/displays_home3.sh, mode "default"
+
+      bindsym w exec $screenlayout/displays_work1.sh, mode "default"
+      bindsym s exec $screenlayout/displays_work2.sh, mode "default"
+      bindsym x exec $screenlayout/displays_work3.sh, mode "default"
+
+      bindsym e exec $screenlayout/displays_wfh1.sh, mode "default"
+      bindsym d exec $screenlayout/displays_wfh2.sh, mode "default"
+      bindsym c exec $screenlayout/displays_wfh3.sh, mode "default"
+
 
       # Back to normal: Enter or Escape
       bindsym Return mode "default"
@@ -463,7 +472,7 @@ set $tn_app0 "nautilus"
 set $tn_app1 "google-chrome"
 set $tn_app2 "firefox"
 set $tn_app3 "atom"
-set $tn_app4 "smplayer"
+set $tn_app4 "vlc"
 #set $tn_app5 ""
 #set $tn_app6 ""
 #set $tn_app7 ""
@@ -518,7 +527,7 @@ mode "$mode_app" {
       bindsym e exec nemo, mode "default"
       bindsym f exec firefox, mode "default"
       bindsym c exec google-chrome, mode "default"
-      bindsym v exec smplayer mode "default"
+      bindsym v exec vlc mode "default"
       bindsym b exec qbittorrent, mode "default"
       bindsym s exec gnome-screenshot, mode "default"
 
