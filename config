@@ -9,7 +9,7 @@
 #
 # Packages:
 # i3 i3lock i3-ipc i3status py3status playerctl feh compton rofi tlp \
-# network-manager-applet terminator smplayer mpv vlc atom numlockx
+# network-manager-applet terminator smplayer mpv vlc atom numlockx dunst
 #
 # Fonts: Overpass, FontAwesome
 #
