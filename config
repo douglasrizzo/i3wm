@@ -136,43 +136,42 @@ set $screen4 "DP2-3"
 # Set primary screen
 exec --no-startup-id xrandr --output $screen1 --primary --rotate normal
 
-# External screen manual management
-# Command: xrandr --query
-set $mode_screen 'Enable|Disable - [q|a] Screen1, [w|s] Screen2, [e|d] Screen3, [r|f] Screen4'
-bindsym $sup+Mod1+s mode "$mode_screen"
+# External screen script layout
+# Command: ARandR
+set $mode_display_home 'Display - Home [1] [2] [3] [4]'
+bindsym $sup+Mod1+z mode "$mode_display_home"
 
-mode "$mode_screen" {
-      bindsym q exec --no-startup-id xrandr --output $screen1 --auto --left-of $screen2, mode "default"
-      bindsym a exec --no-startup-id xrandr --output $screen1 --auto --off, mode "default"
-      bindsym w exec --no-startup-id xrandr --output $screen2 --auto --right-of $screen1, mode "default"
-      bindsym s exec --no-startup-id xrandr --output $screen2 --auto --off, mode "default"
-      bindsym e exec --no-startup-id xrandr --output $screen3 --auto --left-of $screen1, mode "default"
-      bindsym d exec --no-startup-id xrandr --output $screen3 --auto --off, mode "default"
-      bindsym r exec --no-startup-id xrandr --output $screen4 --auto --left-of $screen1, mode "default"
-      bindsym f exec --no-startup-id xrandr --output $screen4 --auto --off, mode "default"
+mode "$mode_display_home" {
+      bindsym 1 exec $screenlayout/displays_home1.sh, mode "default"
+      bindsym 2 exec $screenlayout/displays_home2.sh, mode "default"
+      bindsym 3 exec $screenlayout/displays_home3.sh, mode "default"
+      bindsym 4 exec $screenlayout/displays_home4.sh, mode "default"
 
       # Back to normal: Enter or Escape
       bindsym Return mode "default"
       bindsym Escape mode "default"
 }
 
-# External screen script layout
-# Command: ARandR
-set $mode_display 'Display - Home [qaz] | Work [wsx] | WFH [edc]'
-bindsym $sup+Mod1+d mode "$mode_display"
+set $mode_display_work 'Display - Work [1] [2] [3]'
+bindsym $sup+Mod1+x mode "$mode_display_work"
 
-mode "$mode_display" {
-      bindsym q exec $screenlayout/displays_home1.sh, mode "default"
-      bindsym a exec $screenlayout/displays_home2.sh, mode "default"
-      bindsym z exec $screenlayout/displays_home3.sh, mode "default"
+mode "$mode_display_work" {
+      bindsym 1 exec $screenlayout/displays_work1.sh, mode "default"
+      bindsym 2 exec $screenlayout/displays_work2.sh, mode "default"
+      bindsym 3 exec $screenlayout/displays_work3.sh, mode "default"
 
-      bindsym w exec $screenlayout/displays_work1.sh, mode "default"
-      bindsym s exec $screenlayout/displays_work2.sh, mode "default"
-      bindsym x exec $screenlayout/displays_work3.sh, mode "default"
+      # Back to normal: Enter or Escape
+      bindsym Return mode "default"
+      bindsym Escape mode "default"
+}
 
-      bindsym e exec $screenlayout/displays_wfh1.sh, mode "default"
-      bindsym d exec $screenlayout/displays_wfh2.sh, mode "default"
-      bindsym c exec $screenlayout/displays_wfh3.sh, mode "default"
+set $mode_display_wfh 'Display - WFH - [1] [2] [3]'
+bindsym $sup+Mod1+c mode "$mode_display_wfh"
+
+mode "$mode_display_wfh" {
+      bindsym 1 exec $screenlayout/displays_wfh1.sh, mode "default"
+      bindsym 2 exec $screenlayout/displays_wfh2.sh, mode "default"
+      bindsym 3 exec $screenlayout/displays_wfh3.sh, mode "default"
 
       # Back to normal: Enter or Escape
       bindsym Return mode "default"
@@ -469,7 +468,7 @@ assign [class="[Ll]inphone"] $workspace0
 
 # Program-Related Bindings
 # Application variables for typewriter numeric keys
-set $tn_app0 "nautilus"
+set $tn_app0 "nemo"
 set $tn_app1 "google-chrome"
 set $tn_app2 "firefox"
 set $tn_app3 "atom"
@@ -481,7 +480,7 @@ set $tn_app4 "vlc"
 #set $tn_app9 ""
 
 # Application variables for numeric keypad
-set $KP_app0 "nautilus"
+set $KP_app0 "nemo"
 set $KP_app1 "google-chrome"
 set $KP_app2 "firefox"
 set $KP_app3 "atom"
