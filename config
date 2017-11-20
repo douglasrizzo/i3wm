@@ -138,9 +138,8 @@ exec --no-startup-id xrandr --output $screen1 --primary --rotate normal
 
 # External screen script layout
 # Command: ARandR
-set $mode_display_home 'Display - Home [1] [2] [3] [4]'
+set $mode_display_home 'Display_Home - [1] Main | [2] Right | [3] RightLeft | [4] Left'
 bindsym $sup+Mod1+z mode "$mode_display_home"
-
 mode "$mode_display_home" {
       bindsym 1 exec $screenlayout/displays_home1.sh, mode "default"
       bindsym 2 exec $screenlayout/displays_home2.sh, mode "default"
@@ -152,9 +151,8 @@ mode "$mode_display_home" {
       bindsym Escape mode "default"
 }
 
-set $mode_display_work 'Display - Work [1] [2] [3]'
+set $mode_display_work 'Display_Work - [1] Main | [2] Right | [3] RightLeft'
 bindsym $sup+Mod1+x mode "$mode_display_work"
-
 mode "$mode_display_work" {
       bindsym 1 exec $screenlayout/displays_work1.sh, mode "default"
       bindsym 2 exec $screenlayout/displays_work2.sh, mode "default"
@@ -165,9 +163,8 @@ mode "$mode_display_work" {
       bindsym Escape mode "default"
 }
 
-set $mode_display_wfh 'Display - WFH - [1] [2] [3]'
+set $mode_display_wfh 'Display_WFH - [1] Main | [2] Right | [3] RightLeft'
 bindsym $sup+Mod1+c mode "$mode_display_wfh"
-
 mode "$mode_display_wfh" {
       bindsym 1 exec $screenlayout/displays_wfh1.sh, mode "default"
       bindsym 2 exec $screenlayout/displays_wfh2.sh, mode "default"
@@ -465,6 +462,7 @@ assign [class="q[Bb]ittorrent"] $workspace8
 assign [class="[Hh]exchat"] $workspace9
 assign [class="[Aa]utokey-gtk"] $workspace9
 assign [class="[Ll]inphone"] $workspace0
+assign [class="[Ss]team$"] $workspace7
 
 # Program-Related Bindings
 # Application variables for typewriter numeric keys
@@ -521,7 +519,6 @@ bindsym $altgr+KP_Left exec --no-startup-id $KP_app4
 # Application laucher mode
 set $mode_app '[a]tom,[e]explorer,[f]irefox,[c]hrome,[v]ideo,q[b]itorrent,[s]creenshot'
 bindsym $sup+x mode "$mode_app"
-
 mode "$mode_app" {
       bindsym a exec atom, mode "default"
       bindsym e exec nemo, mode "default"
