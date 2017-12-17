@@ -119,6 +119,26 @@ set $scripts ~/.config/i3/scripts
 # Set screen layout
 set $screenlayout ~/.config/i3/screenlayout
 
+# Wallpaper
+exec_always --no-startup-id feh --bg-scale $wallpaper_folder/wallhaven-64352.jpg
+
+# Composite window
+exec --no-startup-id compton --config $i3_path/compton.conf
+
+# Dunst notification daemon
+exec --no-startup-id dunst -config $i3_path/dunst/dunstrc
+
+# Disable X screen saver feature
+exec_always --no-startup-id xset s off
+
+# Disable X power saving feature
+exec_always --no-startup-id xset -dpms
+
+# Keyboard layout configuration
+# Command: localectl --no-convert set-x11-keymap cz,us pc104 ,dvorak grp:alt_shift_toggle
+# Optional: setxkbmap [-model xkb_model] [-layout xkb_layout] [-variant xkb_variant] [-option xkb_options]
+# Example: setxkbmap -model pc104 -layout cz,us -variant ,dvorak -option grp:alt_shift_toggle
+
 # Set screen names
 # Command: xrandr --current
 # Command: xrandr --query
@@ -188,15 +208,6 @@ set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
 # Command: pactl list sources
 set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
 #set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
-
-# Wallpaper
-exec_always --no-startup-id feh --bg-scale $wallpaper_folder/wallhaven-64352.jpg
-
-# Composite window
-exec --no-startup-id compton --config $i3_path/compton.conf
-
-# Dunst notification daemon
-exec --no-startup-id dunst -config $i3_path/dunst/dunstrc
 
 # NetworkManager applet
 exec_always --no-startup-id nm-applet
