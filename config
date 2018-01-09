@@ -53,6 +53,7 @@
 # --release - execute the command *only* after the keys have been released.
 # it must be used for commands like import and xdotool, which are unable
 # to run upon KeyPress event.
+# setxkbmap -model abnt2 -layout br -variant thinkpad
 
 # Set modifier keys
 # Command: xmodmap
@@ -181,13 +182,13 @@ set $touchpad "SynPS/2 Synaptics TouchPad"
 
 # Set audio out devices
 # Command: pactl list sinks
-set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
-#set $audio_out1 alsa_output.pci-0000_00_1f.3.analog-stereo
+#set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
+set $audio_out1 alsa_output.pci-0000_00_1f.3.analog-stereo
 
 # Set audio in devices
 # Command: pactl list sources
-set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
-#set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
+#set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
+set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
 
 # Wallpaper
 exec_always --no-startup-id feh --bg-scale $wallpaper_folder/wallhaven-64352.jpg
@@ -239,7 +240,8 @@ bindsym F12 exec rofi -show window -lines 5 -eh 2 -width 100 -padding 1 -opacity
 #-color-enabled -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "Overpass 12"
 
 # Lock screen
-bindsym $sup+Ctrl+l exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png -t
+#bindsym $sup+Ctrl+l exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png -t
+bindsym $sup+Ctrl+l exec $scripts/dunst_i3lock
 
 # Screensaver lock
 #exec --no-startup-id xset dpms 600
@@ -564,7 +566,7 @@ bar {
       id 0
 
       # Set font
-      font pango: Overpass, FontAwesome 10
+      font pango: Overpass, FontAwesome 11
 
       # py3status status bar
       status_command py3status -c $i3_path/i3status.conf
