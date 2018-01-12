@@ -3,7 +3,6 @@
 killall -SIGUSR1 dunst
 
 # Lock the screen
-#i3lock --nofork -I 15 -e -f --color 0F121B
 i3lock --nofork -I 15 -e -f --color 000000
 
 # Resume message display

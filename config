@@ -53,7 +53,6 @@
 # --release - execute the command *only* after the keys have been released.
 # it must be used for commands like import and xdotool, which are unable
 # to run upon KeyPress event.
-# setxkbmap -model abnt2 -layout br -variant thinkpad
 
 # Set modifier keys
 # Command: xmodmap
@@ -136,10 +135,12 @@ exec_always --no-startup-id xset s off
 exec_always --no-startup-id xset -dpms
 
 # Keyboard layout configuration
-# Command: localectl --no-convert set-x11-keymap cz,us pc104 ,dvorak grp:alt_shift_toggle
-# Optional: setxkbmap [-model xkb_model] [-layout xkb_layout] [-variant xkb_variant] [-option xkb_options]
-# Example: setxkbmap -model pc104 -layout cz,us -variant ,dvorak -option grp:alt_shift_toggle
-
+# Command: localectl --no-convert set-x11-keymap us thinkpad intl
+#          localectl --no-convert set-keymap us-intl
+# Command: setxkbmap [-model xkb_model] [-layout xkb_layout] [-variant xkb_variant] [-option xkb_options]
+# Example: setxkbmap -model thinkpad -layout us -variant intl
+#          setxkbmap -model thinkpad -layout br -variant abnt2
+#
 # Set screen names
 # Command: xrandr --current
 # Command: xrandr --query
