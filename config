@@ -203,13 +203,13 @@ set $touchpad "SynPS/2 Synaptics TouchPad"
 
 # Set audio out devices
 # Command: pactl list sinks
-#set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
-set $audio_out1 alsa_output.pci-0000_00_1f.3.analog-stereo
+set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
+#set $audio_out1 alsa_output.pci-0000_00_1f.3.analog-stereo
 
 # Set audio in devices
 # Command: pactl list sources
-#set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
-set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
+set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
+#set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
 
 # NetworkManager applet
 exec_always --no-startup-id nm-applet
