@@ -15,3 +15,7 @@ The whole i3wm config file has comments, commands, examples, and so on to help n
 # dnf install i3 i3lock i3-ipc i3status py3status feh compton rofi playerctl network-manager-applet
 ~~~
 
+- Install:
+~~~
+# ln -v -sf ~/git/i3wm/ ~/.config/i3
+~~~
