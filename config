@@ -6,12 +6,20 @@
 # Repositories:
 # dnf copr enable mkrawiec/i3desktop
 # dnf copr enable jvcelak/playerctl
+# dnf copr enable yaroslav/i3desktop
 #
 # Packages:
 # i3 i3lock i3-ipc i3status py3status playerctl feh compton rofi tlp \
 # network-manager-applet terminator smplayer mpv vlc atom numlockx dunst
 #
-# Fonts: Ubuntu, Overpass, FontAwesome
+# Tested with:
+# i3-4.14.1
+# i3lock-2.9.1
+# dunst-1.1.0
+# py3status-3.6-2
+# rofi-1.4.2-1
+#
+# Fonts: Ubuntu, Inconsolata, Overpass, FontAwesome
 #
 # IMPORTANT NOTE:
 # Mapping keyboard keycodes and symbols
@@ -84,27 +92,27 @@ set $base0E #c0b7f9
 set $base0F #fcc09e
 
 # Set colors
-set $bg-color            #2F343F
-set $bg-inactive-color   #2F343F
+set $bg-color            #1E1E1E
+set $bg-inactive-color   #323232
 set $bg-urgent-color     #DC322F
-set $bd-color            #2F343F
-set $bd-inactive-color   #2F343F
+set $bd-color            #1E1E1E
+set $bd-inactive-color   #323232
 set $bd-urgent-color     #CC0000
-set $text-color          #F3F4F5
-set $text-inactive-color #676E7D
+set $text-color          #FFFFFF
+set $text-inactive-color #828282
 
 # Set workspace and i3bar colors
-set $bar-bg-color           #2F343F
-set $bar-statline-color     #ffffff
+set $bar-bg-color           #1E1E1E
+set $bar-statusline-color   #FFFFFF
 set $bar-separator-color    #B4B4B4
 set $ws-bg-color            #004153
-set $ws-bg-inactive-color   #2F343F
+set $ws-bg-inactive-color   #1E1E1E
 set $ws-bg-urgent-color     #CC0000
-set $ws-bd-color            #004153
-set $ws-bd-inactive-color   #2F343F
+set $ws-bd-color            #1E1E1E
+set $ws-bd-inactive-color   #1E1E1E
 set $ws-bd-urgent-color     #CC0000
-set $ws-text-color          #F3F4F5
-set $ws-text-inactive-color #676E7D
+set $ws-text-color          #FFFFFF
+set $ws-text-inactive-color #828282
 
 # Set window colors
 #                       border              background         text                 indicator
@@ -113,7 +121,7 @@ client.unfocused        $bd-inactive-color  $bg-inactive-color $text-inactive-co
 client.focused_inactive $bd-inactive-color  $bg-inactive-color $text-inactive-color $base0F
 client.urgent           $bd-urgent-color    $bg-urgent-color   $text-color          $base0F
 
-# Set i3 base directory path
+# Set i3 base directory
 set $i3_path ~/.config/i3
 
 # Set wallpaper directory
@@ -124,6 +132,9 @@ set $screenshot_folder ~/Pictures
 
 # Set custom scripts path
 set $scripts ~/.config/i3/scripts
+
+# Set rofi directory
+set $rofi_folder ~/.config/i3/rofi
 
 # Set screen layout
 set $screenlayout ~/.config/i3/screenlayout
@@ -212,13 +223,13 @@ set $touchpad "SynPS/2 Synaptics TouchPad"
 
 # Set audio out devices
 # Command: pactl list sinks
-#set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
-set $audio_out1 alsa_output.pci-0000_00_1f.3.analog-stereo
+set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
+#set $audio_out1 alsa_output.pci-0000_00_1f.3.analog-stereo
 
 # Set audio in devices
 # Command: pactl list sources
-#set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
-set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
+set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
+#set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
 
 # NetworkManager applet
 exec_always --no-startup-id nm-applet
@@ -250,12 +261,14 @@ bindsym $sup+Escape kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $sup+d exec --no-startup-id i3-dmenu-desktop
+bindsym $sup+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -l 7 -nb '#002C38' -nf '#FFFFFF' -sf '#38C8E8' -fn 'Ubuntu 11'"
 # Start rofi (alternative program launcher)
 #bindsym $sup+d exec rofi -show run
 
 # Window switcher
-bindsym F12 exec rofi -show window -lines 5 -eh 2 -width 100 -padding 1 -opacity "80" -columns 2 -font "Ubuntu 14"
+bindsym F12 exec rofi -theme "$rofi_folder/tmrizzo_theme.rasi" -show window -lines 5 -eh 2 -width 100 -padding 1 -opacity "85" -columns 2 -font "Ubuntu 14"
+bindsym F9 exec rofi -theme "$rofi_folder/tmrizzo_theme.rasi" -show run -lines 6 -eh 1 -width 100 -padding 800 -opacity "85" -bw 0 -font "Ubuntu 14"
+bindsym F8 exec rofi -theme "$rofi_folder/tmrizzo_theme.rasi" -show ssh -lines 6 -eh 1 -width 100 -padding 800 -opacity "85" -bw 0 -font "Ubuntu 14"
 
 # Lock screen
 #bindsym $sup+Ctrl+l exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png -t
@@ -621,6 +634,7 @@ bar {
 
    colors {
       background $bar-bg-color
+      statusline $bar-statusline-color
       separator  $bar-separator-color
       #                  border                background            text
       focused_workspace  $ws-bd-color          $ws-bg-color          $ws-text-color
@@ -669,6 +683,7 @@ bar {
 
    colors {
       background $bar-bg-color
+      statusline $bar-statusline-color
       separator  $bar-separator-color
       #                  border                background            text
       focused_workspace  $ws-bd-color          $ws-bg-color          $ws-text-color

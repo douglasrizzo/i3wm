@@ -1,5 +1,6 @@
 [global]
-font = Monospace 12
+#font = Monospace 12
+font = Ubuntu Mono 12
 
 # Allow a small subset of html markup:
 #   <b>bold</b>
@@ -135,7 +136,8 @@ horizontal_padding = 6
 #  * foreground: use the same color as the foreground;
 #  * frame: use the same color as the frame;
 #  * anything else will be interpreted as a X color.
-separator_color = frame
+#separator_color = frame
+separator_color = foreground
 
 # Print a notification on startup.
 # This is mainly for error detection, since dbus (re-)starts dunst
