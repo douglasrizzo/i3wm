@@ -266,12 +266,11 @@ bindsym $sup+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -l 7 -nb 
 #bindsym $sup+d exec rofi -show run
 
 # Window switcher
-bindsym F12 exec rofi -theme "$rofi_folder/tmrizzo_theme.rasi" -show window -lines 5 -eh 2 -width 100 -padding 1 -opacity "85" -columns 2 -font "Ubuntu 14"
-bindsym F9 exec rofi -theme "$rofi_folder/tmrizzo_theme.rasi" -show run -lines 6 -eh 1 -width 100 -padding 800 -opacity "85" -bw 0 -font "Ubuntu 14"
-bindsym F8 exec rofi -theme "$rofi_folder/tmrizzo_theme.rasi" -show ssh -lines 6 -eh 1 -width 100 -padding 800 -opacity "85" -bw 0 -font "Ubuntu 14"
+bindsym F7  exec rofi -theme "$rofi_folder/tmrizzo_theme.rasi" -show run -lines 6 -opacity "30"
+bindsym F8  exec rofi -theme "$rofi_folder/tmrizzo_theme.rasi" -show window -lines 6 -opacity "30"
+bindsym F12 exec rofi -theme "$rofi_folder/tmrizzo_theme.rasi" -show ssh -lines 6 -opacity "30"
 
 # Lock screen
-#bindsym $sup+Ctrl+l exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png -t
 bindsym $sup+Ctrl+l exec $scripts/dunst_i3lock
 
 # Screensaver lock
