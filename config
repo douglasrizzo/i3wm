@@ -11,7 +11,7 @@
 # i3 i3lock i3-ipc i3status py3status playerctl feh compton rofi tlp \
 # network-manager-applet terminator smplayer mpv vlc atom numlockx dunst
 #
-# Fonts: Overpass, FontAwesome
+# Fonts: Ubuntu, Overpass, FontAwesome
 #
 # IMPORTANT NOTE:
 # Mapping keyboard keycodes and symbols
@@ -84,25 +84,31 @@ set $base0E #c0b7f9
 set $base0F #fcc09e
 
 # Set colors
-set $bg-color            #2f343f
-set $inactive-bg-color   #2f343f
-set $text-color          #f3f4f5
-set $inactive-text-color #676E7D
-set $urgent-bg-color     #E53935
+set $bg-color            #2F343F
+set $bg-inactive-color   #2F343F
+set $bg-urgent-color     #DC322F
+set $bd-color            #2F343F
+set $bd-inactive-color   #2F343F
+set $bd-urgent-color     #DC322F
+set $text-color          #F3F4F5
+set $text-inactive-color #676E7D
 
 # Set workspace colors
-set $ws-bg-color            #2f343f
-set $ws-inactive-bg-color   #2f343f
-set $ws-text-color          #f3f4f5
-set $ws-inactive-text-color #676E7D
-set $ws-urgent-bg-color     #E53935
+set $ws-bg-color            #2F343F
+set $ws-bg-inactive-color   #2F343F
+set $ws-bg-urgent-color     #DC322F
+set $ws-bd-color            #2F343F
+set $ws-bd-inactive-color   #2F343F
+set $ws-bd-urgent-color     #DC322F
+set $ws-text-color          #F3F4F5
+set $ws-text-inactive-color #676E7D
 
 # Set window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          $base0F
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $base0F
-client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $base0F
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $base0F
+client.focused          $bd-color           $bg-color          $text-color          $base0F
+client.unfocused        $bd-inactive-color  $bg-inactive-color $text-inactive-color $base0F
+client.focused_inactive $bd-inactive-color  $bg-inactive-color $text-inactive-color $base0F
+client.urgent           $bd-urgent-color    $bg-urgent-color   $text-color          $base0F
 
 # Set i3 base directory path
 set $i3_path ~/.config/i3
@@ -221,7 +227,8 @@ exec --no-startup-id xinput set-prop $touchpad "libinput Tapping Enabled" 1
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:Overpass 10
-font pango:DejaVu Sans Mono 9
+#font pango:DejaVu Sans Mono 9
+font pango:Ubuntu 9
 
 # Use Mouse+$sup to drag floating windows to their wanted position
 floating_modifier $sup
@@ -242,9 +249,8 @@ bindsym $sup+Escape kill
 # installed.
 bindsym $sup+d exec --no-startup-id i3-dmenu-desktop
 
-# Rofi bindings
-bindsym F9 exec rofi -show run -lines 5 -eh 2 -width 100 -padding 10 -opacity "80" -columns 2 -font "Overpass 14"
-bindsym F12 exec rofi -show window -lines 5 -eh 2 -width 100 -padding 1 -opacity "80" -columns 2 -font "Overpass 14"
+# Window switcher
+bindsym F12 exec rofi -show window -lines 5 -eh 2 -width 100 -padding 1 -opacity "80" -columns 2 -font "Ubuntu 14"
 
 # Start rofi (alternative program launcher)
 #bindsym $sup+d exec rofi -show run
@@ -313,53 +319,53 @@ bindsym $sup+a focus parent
 #bindsym $sup+d focus child
 
 # Set workspaces variables and specific icon sets
-set $workspace1 "1: "
-set $workspace2 "2: "
-set $workspace3 "3: "
-set $workspace4 "4: "
-set $workspace5 "5: "
-set $workspace6 "6: "
-set $workspace7 "7: "
-set $workspace8 "8: "
-set $workspace9 "9: "
-set $workspace0 "10: "
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 "6:"
+set $ws7 "7:"
+set $ws8 "8:"
+set $ws9 "9:"
+set $ws0 "10:"
 
 # Switch back and forth between previous workspace
 workspace_auto_back_and_forth yes
 
 # Switch to workspace
-bindsym $sup+1 workspace $workspace1
-bindsym $sup+2 workspace $workspace2
-bindsym $sup+3 workspace $workspace3
-bindsym $sup+4 workspace $workspace4
-bindsym $sup+5 workspace $workspace5
-bindsym $sup+6 workspace $workspace6
-bindsym $sup+7 workspace $workspace7
-bindsym $sup+8 workspace $workspace8
-bindsym $sup+9 workspace $workspace9
-bindsym $sup+0 workspace $workspace0
+bindsym $sup+1 workspace $ws1
+bindsym $sup+2 workspace $ws2
+bindsym $sup+3 workspace $ws3
+bindsym $sup+4 workspace $ws4
+bindsym $sup+5 workspace $ws5
+bindsym $sup+6 workspace $ws6
+bindsym $sup+7 workspace $ws7
+bindsym $sup+8 workspace $ws8
+bindsym $sup+9 workspace $ws9
+bindsym $sup+0 workspace $ws0
 
 # Move focused container to workspace
-bindsym $sup+Shift+1 move container to workspace $workspace1
-bindsym $sup+Shift+2 move container to workspace $workspace2
-bindsym $sup+Shift+3 move container to workspace $workspace3
-bindsym $sup+Shift+4 move container to workspace $workspace4
-bindsym $sup+Shift+5 move container to workspace $workspace5
-bindsym $sup+Shift+6 move container to workspace $workspace6
-bindsym $sup+Shift+7 move container to workspace $workspace7
-bindsym $sup+Shift+8 move container to workspace $workspace8
-bindsym $sup+Shift+9 move container to workspace $workspace9
-bindsym $sup+Shift+0 move container to workspace $workspace0
+bindsym $sup+Shift+1 move container to workspace $ws1
+bindsym $sup+Shift+2 move container to workspace $ws2
+bindsym $sup+Shift+3 move container to workspace $ws3
+bindsym $sup+Shift+4 move container to workspace $ws4
+bindsym $sup+Shift+5 move container to workspace $ws5
+bindsym $sup+Shift+6 move container to workspace $ws6
+bindsym $sup+Shift+7 move container to workspace $ws7
+bindsym $sup+Shift+8 move container to workspace $ws8
+bindsym $sup+Shift+9 move container to workspace $ws9
+bindsym $sup+Shift+0 move container to workspace $ws0
 
 # Workspace default screens
-#workspace $workspace1 output $screen1
-#workspace $workspace2 output $screen1
-#workspace $workspace3 output $screen1
-#workspace $workspace4 output $screen1
-#workspace $workspace5 output $screen1
-#workspace $workspace6 output $screen1
-#workspace $workspace9 output $screen1
-#workspace $workspace0 output $screen1
+#workspace $ws1 output $screen1
+#workspace $ws2 output $screen1
+#workspace $ws3 output $screen1
+#workspace $ws4 output $screen1
+#workspace $ws5 output $screen1
+#workspace $ws6 output $screen1
+#workspace $ws9 output $screen1
+#workspace $ws0 output $screen1
 
 # Reload the configuration file
 bindsym $sup+Shift+c reload
@@ -467,16 +473,16 @@ for_window [class="[Ff]ile-roller$"] floating enable
 for_window [class="[Nn]autilus$"] floating enable
 
 # Assign applications default workspaces
-assign [class="[Gg]oogle-chrome(-beta)?"] $workspace1
-assign [class="[Ff]irefox"] $workspace2
-assign [class="[Aa]tom"] $workspace3
-assign [class="[Vv]irt-manager"] $workspace6
-assign [class="[Vv]irtual[Bb]ox"] $workspace6
-assign [class="q[Bb]ittorrent"] $workspace8
-assign [class="[Hh]exchat"] $workspace9
-assign [class="[Aa]utokey-gtk"] $workspace9
-assign [class="[Ll]inphone"] $workspace0
-assign [class="[Ss]team$"] $workspace7
+assign [class="[Gg]oogle-chrome(-beta)?"] $ws1
+assign [class="[Ff]irefox"] $ws2
+assign [class="[Aa]tom"] $ws3
+assign [class="[Vv]irt-manager"] $ws6
+assign [class="[Vv]irtual[Bb]ox"] $ws6
+assign [class="q[Bb]ittorrent"] $ws8
+assign [class="[Hh]exchat"] $ws9
+assign [class="[Aa]utokey-gtk"] $ws9
+assign [class="[Ll]inphone"] $ws0
+assign [class="[Ss]team$"] $ws7
 
 # Program-Related Bindings
 # Application variables for typewriter numeric keys
@@ -578,7 +584,7 @@ bar {
       id 0
 
       # Set font
-      font pango: Overpass, FontAwesome 11
+      font pango: Ubuntu, FontAwesome 12
 
       # py3status status bar
       status_command py3status -c $i3_path/i3status.conf
@@ -617,9 +623,9 @@ bar {
       background $ws-bg-color
       separator #b4b4b4
       #                  border                background            text
-      focused_workspace  $ws-bg-color          $ws-bg-color          $ws-text-color
-      inactive_workspace $ws-inactive-bg-color $ws-inactive-bg-color $ws-inactive-text-color
-      urgent_workspace   $ws-urgent-bg-color   $ws-urgent-bg-color   $ws-text-color
+      focused_workspace  $ws-bd-color          $ws-bg-color          $ws-text-color
+      inactive_workspace $ws-bd-inactive-color $ws-bg-inactive-color $ws-text-inactive-color
+      urgent_workspace   $ws-bd-urgent-color   $ws-bg-urgent-color   $ws-text-color
    }
 }
 
@@ -629,7 +635,7 @@ bar {
       id 1
 
       # Set font
-      font pango: Overpass, FontAwesome 10
+      font pango: Ubuntu, FontAwesome 12
 
       # Set output screen
       output $screen2
@@ -665,9 +671,9 @@ bar {
       background $bg-color
       separator #b4b4b4
       #                  border                background            text
-      focused_workspace  $ws-bg-color          $ws-bg-color          $ws-text-color
-      inactive_workspace $ws-inactive-bg-color $ws-inactive-bg-color $ws-inactive-text-color
-      urgent_workspace   $ws-urgent-bg-color   $ws-urgent-bg-color   $ws-text-color
+      focused_workspace  $ws-bd-color          $ws-bg-color          $ws-text-color
+      inactive_workspace $ws-bd-inactive-color $ws-bg-inactive-color $ws-text-inactive-color
+      urgent_workspace   $ws-bd-urgent-color   $ws-bg-urgent-color   $ws-text-color
    }
 }
 
