@@ -89,17 +89,20 @@ set $bg-inactive-color   #2F343F
 set $bg-urgent-color     #DC322F
 set $bd-color            #2F343F
 set $bd-inactive-color   #2F343F
-set $bd-urgent-color     #DC322F
+set $bd-urgent-color     #CC0000
 set $text-color          #F3F4F5
 set $text-inactive-color #676E7D
 
-# Set workspace colors
-set $ws-bg-color            #2F343F
+# Set workspace and i3bar colors
+set $bar-bg-color           #2F343F
+set $bar-statline-color     #ffffff
+set $bar-separator-color    #B4B4B4
+set $ws-bg-color            #004153
 set $ws-bg-inactive-color   #2F343F
-set $ws-bg-urgent-color     #DC322F
-set $ws-bd-color            #2F343F
+set $ws-bg-urgent-color     #CC0000
+set $ws-bd-color            #004153
 set $ws-bd-inactive-color   #2F343F
-set $ws-bd-urgent-color     #DC322F
+set $ws-bd-urgent-color     #CC0000
 set $ws-text-color          #F3F4F5
 set $ws-text-inactive-color #676E7D
 
@@ -248,14 +251,11 @@ bindsym $sup+Escape kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 bindsym $sup+d exec --no-startup-id i3-dmenu-desktop
+# Start rofi (alternative program launcher)
+#bindsym $sup+d exec rofi -show run
 
 # Window switcher
 bindsym F12 exec rofi -show window -lines 5 -eh 2 -width 100 -padding 1 -opacity "80" -columns 2 -font "Ubuntu 14"
-
-# Start rofi (alternative program launcher)
-#bindsym $sup+d exec rofi -show run
-#bindsym $sup+d exec rofi -show run -lines 3 -eh 2 -width 100 -fullscreen -opacity "90" \
-#-color-enabled -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "Overpass 12"
 
 # Lock screen
 #bindsym $sup+Ctrl+l exec i3lock -I 15 -e -f --color 0F121B -i $wallpaper_folder/wallhaven-64352.png -t
@@ -608,7 +608,7 @@ bar {
       #modifier Mod1
 
       # Custom separator
-      separator_symbol ":"
+      separator_symbol "|"
 
       # Workspace buttons
       workspace_buttons yes
@@ -620,8 +620,8 @@ bar {
       bindsym button5 nop
 
    colors {
-      background $ws-bg-color
-      separator #b4b4b4
+      background $bar-bg-color
+      separator  $bar-separator-color
       #                  border                background            text
       focused_workspace  $ws-bd-color          $ws-bg-color          $ws-text-color
       inactive_workspace $ws-bd-inactive-color $ws-bg-inactive-color $ws-text-inactive-color
@@ -656,7 +656,7 @@ bar {
       #modifier Mod1
 
       # Custom separator
-      separator_symbol ":"
+      separator_symbol "|"
 
       # Workspace buttons
       workspace_buttons yes
@@ -668,8 +668,8 @@ bar {
       bindsym button5 nop
 
    colors {
-      background $bg-color
-      separator #b4b4b4
+      background $bar-bg-color
+      separator  $bar-separator-color
       #                  border                background            text
       focused_workspace  $ws-bd-color          $ws-bg-color          $ws-text-color
       inactive_workspace $ws-bd-inactive-color $ws-bg-inactive-color $ws-text-inactive-color
