@@ -1,6 +1,6 @@
 [global]
 #font = Monospace 12
-font = Ubuntu Mono 12
+font = Ubuntu 12
 
 # Allow a small subset of html markup:
 #   <b>bold</b>
@@ -81,7 +81,7 @@ shrink = no
 # The transparency of the window.  Range: [0; 100].
 # This option will only work if a compositing windowmanager is
 # present (e.g. xcompmgr, compiz, etc.).
-transparency = 5
+transparency = 15
 
 # Don't remove messages, if the user is idle (no mouse or keyboard input)
 # for longer than idle_threshold seconds.
@@ -125,10 +125,10 @@ line_height = 3
 separator_height = 2
 
 # Padding between text and separator.
-padding = 6
+padding = 8
 
 # Horizontal padding.
-horizontal_padding = 6
+horizontal_padding = 8
 
 # Define a color for the separator.
 # possible values are:
@@ -136,7 +136,6 @@ horizontal_padding = 6
 #  * foreground: use the same color as the foreground;
 #  * frame: use the same color as the frame;
 #  * anything else will be interpreted as a X color.
-#separator_color = frame
 separator_color = foreground
 
 # Print a notification on startup.
@@ -158,8 +157,8 @@ max_icon_size = 80
 icon_folders = /usr/share/icons/Paper/16x16/mimetypes/:/usr/share/icons/Paper/48x48/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/48x48/notifications/:/usr/share/icons/Paper/48x48/emblems/
 
 [frame]
-width = 3
-color = "#8EC07C"
+width = 1
+color = "#FFFFFF"
 
 [shortcuts]
 # Shortcuts are specified as [modifier+][modifier+]...key
